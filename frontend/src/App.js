@@ -1,32 +1,30 @@
-// frontend/src/App.js
-import React, { useState } from 'react';
-import CRDashboard from './components/CRDashboard';
-import CRForm from './CRForm';
 
-function App() {
-  const [refreshFlag, setRefreshFlag] = useState(false);
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AppLayout from './components/AppLayout';
 
-  const handleFormSubmitted = () => {
-    setRefreshFlag((prev) => !prev); // toggle to trigger useEffect
-  };
+import Home from './pages/Home';
+import CRForm from './pages/CRForm';
+import CRDashboard from './pages/CRDashboard';
+import ReviewPage from './pages/ReviewPage';
+import DynamicEntryPage from './pages/DynamicEntryPage';
+import ThankYouPage from './pages/ThankYouPage';
 
+const App = () => {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold text-center mb-6">CR Friday Night Numbers</h1>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-4 rounded-lg shadow">
-          <h2 className="text-2xl font-semibold mb-4">Submit New Report</h2>
-          <CRForm onSubmitSuccess={handleFormSubmitted} />
-        </div>
-
-        <div className="bg-white p-4 rounded-lg shadow overflow-x-auto">
-          <h2 className="text-2xl font-semibold mb-4">Dashboard</h2>
-          <CRDashboard refreshFlag={refreshFlag} />
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/form" element={<CRForm />} />
+          <Route path="/dashboard" element={<CRDashboard />} />
+          <Route path="/review" element={<ReviewPage />} />
+          <Route path="/dynamic-entry" element={<DynamicEntryPage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
+        </Route>
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;

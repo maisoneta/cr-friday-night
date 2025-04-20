@@ -1,0 +1,113 @@
+
+.cr-dashboard {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 2rem;
+  background-color: #ffffff;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.table-header {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.cr-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.cr-table th,
+.cr-table td {
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.cr-table th {
+  background-color: #cde9f6;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.cr-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cr-table tbody tr:hover {
+  background-color: #f1faff;
+}
+
+.year-selector {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.year-selector label {
+  margin-right: 0.5rem;
+  font-weight: 500;
+}
+
+select#year {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Conditional cell shading based on comparison to average */
+.above-average {
+  background-color: #eaf6ef; /* light green */
+  font-weight: bold;
+  box-shadow: inset 0 0 4px #c4e2c7;
+}
+
+.below-average {
+  background-color: #fffde0; /* light yellow */
+  box-shadow: inset 0 0 4px #f3edae;
+}
+
+/* Legend styles */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #444;
+}
+
+.legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.legend-box {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  border-radius: 3px;
+  border: 1px solid #999;
+}
+
+.legend-green {
+  background-color: #eaf6ef;
+}
+
+.legend-yellow {
+  background-color: #fffde0;
+}
