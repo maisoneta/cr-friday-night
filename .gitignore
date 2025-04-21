@@ -2,7 +2,7 @@
 **/.env
 
 # Ignore sendEmail files
-**/sendEmail.js
+# **/sendEmail.js
 
 # Ignore build artifacts and system files
 node_modules/
@@ -14,5 +14,5 @@ frontend/package-lock 3.json
 frontend/package-lock 4.json
 
 # Optional: ignore entire folders
-backend/utils/
-backend/scripts/
+# backend/utils/
+# backend/scripts/
