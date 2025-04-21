@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../components/CRDashboard.css';
+import { API_BASE_URL } from '../config';
 
 const CRDashboard = () => {
   const [reports, setReports] = useState([]);
@@ -11,7 +12,7 @@ const CRDashboard = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const res = await fetch('http://localhost:5002/api/reports');
+        const res = await fetch(`${API_BASE_URL}/api/reports`);
         const data = await res.json();
 
         const sorted = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
@@ -73,6 +74,7 @@ const CRDashboard = () => {
   const formatCell = (value, key) => {
     if (key === 'date') {
       return new Date(value).toLocaleDateString('en-US', {
+        timeZone: 'UTC', // 👈 forces the date to stay in UTC
         month: 'short',
         day: 'numeric',
         year: 'numeric'
