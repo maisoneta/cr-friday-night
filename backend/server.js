@@ -20,9 +20,12 @@ connectDB();
 const app = express();
 
 // ✅ Global middleware
-app.use(cors());              // Allow requests from any domain
+app.use(cors({
+  origin: '*',
+  credentials: true
+}));
 app.use(express.json());      // Parse JSON bodies from frontend
-app.options('*', cors());     // Handle CORS preflight requests
+
 
 // ✅ Mount API routes
 app.use('/api/pending', pendingRoutes);   // Partial inputs (staging)
