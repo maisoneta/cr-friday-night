@@ -1,7 +1,11 @@
+/* App.css */
 .App {
   text-align: center;
+  background: var(--background-light);
+  min-height: 100vh;
 }
 
+/* Animated logo if you use it */
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -13,21 +17,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,40 +26,51 @@
   }
 }
 
-/* === Dynamic Entry Page Styling === */
+.App-header {
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: 2rem 0 1rem 0;
+}
+
+.App-link {
+  color: var(--primary-blue);
+}
+
+/* === Entry Page Styling === */
 .entry-page {
-  padding: 1rem;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 1.5rem;
+  font-family: inherit;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background: var(--background-light);
 }
 
 .entry-page h2 {
   text-align: center;
-  color: #0c3b6b;
-  font-weight: 600;
-  margin-bottom: 1rem;
+  color: var(--primary-blue);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
 }
 
 .entry-page form {
   width: 100%;
   max-width: 500px;
-  background-color: #f7fafd;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 20px rgba(22,76,136,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
+  border: 1px solid var(--gray-accent);
 }
 
 .entry-page label {
-  display: block;
-  margin: 0.75rem auto 0.25rem;
+  margin: 1rem 0 0.25rem 0;
   font-weight: 500;
-  color: #0c3b6b;
-  text-align: center;
+  color: var(--primary-blue);
+  text-align: left;
   width: 100%;
   max-width: 400px;
 }
@@ -79,26 +79,37 @@
 .entry-page input {
   width: 100%;
   max-width: 400px;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  margin-bottom: 1rem;
+  padding: 0.65rem;
+  font-size: 1.05rem;
+  border: 1.5px solid var(--primary-blue);
+  border-radius: 10px;
+  margin-bottom: 1.1rem;
+  background: var(--gray-accent);
+  transition: border 0.2s;
+}
+.entry-page select:focus,
+.entry-page input:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 4px var(--primary-blue, #164c88);
 }
 
 .entry-page button[type="submit"] {
-  background-color: orange;
-  color: white;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
+  background: var(--primary-blue);
+  color: var(--white);
+  padding: 0.7rem 1.4rem;
+  font-size: 1.08rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
   width: 100%;
   max-width: 400px;
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  box-shadow: 0 2px 8px rgba(22,76,136,0.09);
+  transition: background 0.2s;
 }
 
 .entry-page button[type="submit"]:hover {
-  background-color: #ff9900;
+  background: var(--orange-dark);
 }

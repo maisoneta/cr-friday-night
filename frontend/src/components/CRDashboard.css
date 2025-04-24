@@ -1,113 +1,122 @@
+/* CRDashboard.css */
 
 .cr-dashboard {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 2rem;
-  background-color: #ffffff;
+  font-family: inherit;
+  padding: 2rem 0.5rem;
+  background: var(--background-light);
 }
 
 .dashboard-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
   text-align: center;
+  color: var(--primary-blue);
+  letter-spacing: 1px;
 }
 
 .table-header {
-  font-size: 1.25rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.18rem;
+  margin-top: 1.8rem;
+  margin-bottom: 0.4rem;
+  color: var(--primary-blue);
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .cr-table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(22,76,136,0.06);
+  border-radius: 16px;
   overflow: hidden;
+  background: var(--white);
 }
 
 .cr-table th,
 .cr-table td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
+  border: 1px solid var(--gray-accent);
+  padding: 0.6rem 0.3rem;
   text-align: center;
 }
 
 .cr-table th {
-  background-color: #cde9f6;
+  background: var(--table-header);
   font-weight: bold;
+  color: var(--primary-blue);
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
 .cr-table tbody tr:nth-child(even) {
-  background-color: #f9f9f9;
+  background: var(--gray-accent);
 }
 
 .cr-table tbody tr:hover {
-  background-color: #f1faff;
+  background: var(--background-light);
 }
 
 .year-selector {
-  margin-bottom: 1rem;
+  margin-bottom: 1.3rem;
   text-align: center;
 }
 
 .year-selector label {
-  margin-right: 0.5rem;
-  font-weight: 500;
+  margin-right: 0.6rem;
+  font-weight: 600;
+  color: var(--primary-blue);
 }
 
 select#year {
-  padding: 0.4rem 0.6rem;
+  padding: 0.5rem 0.8rem;
   font-size: 1rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 7px;
+  border: 1.5px solid var(--primary-blue);
+  background: var(--white);
+  color: var(--text-dark);
 }
 
-/* Conditional cell shading based on comparison to average */
 .above-average {
-  background-color: #eaf6ef; /* light green */
+  background: var(--success-green);
   font-weight: bold;
   box-shadow: inset 0 0 4px #c4e2c7;
 }
 
 .below-average {
-  background-color: #fffde0; /* light yellow */
+  background: var(--warning-yellow);
   box-shadow: inset 0 0 4px #f3edae;
 }
 
-/* Legend styles */
 .legend {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: 1.3rem;
   margin-top: -1rem;
   margin-bottom: 1rem;
-  font-size: 0.9rem;
-  color: #444;
+  font-size: 0.97rem;
+  color: var(--gray-medium);
 }
 
 .legend span {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
 
 .legend-box {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: inline-block;
-  border-radius: 3px;
-  border: 1px solid #999;
+  border-radius: 5px;
+  border: 1px solid #b8b8b8;
 }
 
 .legend-green {
-  background-color: #eaf6ef;
+  background: var(--success-green);
 }
 
 .legend-yellow {
-  background-color: #fffde0;
+  background: var(--warning-yellow);
 }

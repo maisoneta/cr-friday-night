@@ -1,10 +1,28 @@
+/* index.css */
+:root {
+  --primary-blue: #164c88;
+  --background-light: #e9f1fa;
+  --gray-accent: #f5f7fa;
+  --gray-medium: #888;
+  --text-dark: #222;
+  --text-darker: #333;
+  --white: #fff;
+  --table-header: #cde9f6;
+  --success-green: #eaf6ef;
+  --warning-yellow: #fffde0;
+  --orange: #ffa500;
+  --orange-dark: #ff9900;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--background-light);
+  color: var(--text-dark);
 }
 
 code {
