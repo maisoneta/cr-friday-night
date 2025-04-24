@@ -23,7 +23,7 @@ const fieldLabels = {
 
 const ReviewPage = () => {
   const [selectedDate, setSelectedDate] = useState('');
-  const [entries, setEntries] = useState([]);
+  // const [entries, setEntries] = useState([]);
   const [finalReport, setFinalReport] = useState({});
   const [status, setStatus] = useState({});
 
@@ -32,7 +32,7 @@ const ReviewPage = () => {
 
     const fetchPendingData = async () => {
       try {
-        const response = await fetch('/api/pending/' + selectedDate);
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/api/pending/${selectedDate}`);
         const data = await response.json();
 
         const grouped = {};
@@ -64,11 +64,12 @@ const ReviewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch('/api/reports', {
+      await fetch(`${process.env.REACT_APP_API_URL}/api/reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalReport, date: selectedDate })
       });
+
       alert('✅ Final report submitted!');
       setFinalReport({});
       setSelectedDate('');
