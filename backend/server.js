@@ -34,9 +34,8 @@ app.get('/', (req, res) => {
 });
 
 // ✅ Define the port from environment or fallback to 5002
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT;
 
-// ✅ Start the backend server
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, () => {
   console.log(`✅ Server running and accessible on port ${PORT}`);
 });
