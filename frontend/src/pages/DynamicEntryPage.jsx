@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 
+import { API_BASE_URL } from '../config'; // add this at the top if not already present
+
 const DynamicEntryPage = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [formData, setFormData] = useState({});
@@ -38,7 +40,8 @@ const DynamicEntryPage = () => {
 
       const responses = await Promise.all(
         entries.map(entry =>
-          fetch('/api/pending', {
+          // Then use:
+          fetch(`${API_BASE_URL}/api/pending`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(entry)
