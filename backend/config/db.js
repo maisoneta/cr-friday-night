@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 // ✅ Log the MongoDB URI from the environment variables to confirm it's being loaded properly
 // This helps during development/debugging to ensure the URI is not undefined or malformed
-console.log(`📡 Attempting to connect to MongoDB: ${process.env.MONGO_URI}`);
+//console.log(`📡 Attempting to connect to MongoDB: ${process.env.MONGO_URI}`);
 
 // ✅ Define an async function to handle connecting to MongoDB
 const connectDB = async () => {

@@ -1,44 +1,38 @@
 // backend/server.js
 
-// ✅ Core dependencies
-const express = require('express');               // Web framework for Node.js
-const dotenv = require('dotenv');                 // Loads environment variables from .env file
-const cors = require('cors');                     // Middleware to enable CORS
-const connectDB = require('./config/db');         // Custom MongoDB connection module
+const express = require('express');
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./config/db');
+const pendingRoutes = require('./routes/pending');
+const reportsRoutes = require('./routes/reports');
 
-// ✅ Route handlers
-const pendingRoutes = require('./routes/pending');    // Handles staging (pending) inputs
-const reportsRoutes = require('./routes/reports');    // Handles finalized CR report submissions
-
-// ✅ Load environment variables (e.g., MONGO_URI, PORT)
+// ✅ Load environment variables (MONGO_URI, PORT)
 dotenv.config();
 
-// ✅ Connect to MongoDB using provided MONGO_URI
+// ✅ (Optional for debug) Show MongoDB URI (remove in production!)
+console.log(`📡 Attempting to connect to MongoDB: ${process.env.MONGO_URI}`);
+
+// ✅ Connect to MongoDB
 connectDB();
 
 // ✅ Initialize the Express app
 const app = express();
 
-// ✅ Global middleware
 app.use(cors({
   origin: '*',
   credentials: true
 }));
-app.use(express.json());      // Parse JSON bodies from frontend
+app.use(express.json());
 
+app.use('/api/pending', pendingRoutes);
+app.use('/api/reports', reportsRoutes);
 
-// ✅ Mount API routes
-app.use('/api/pending', pendingRoutes);   // Partial inputs (staging)
-app.use('/api/reports', reportsRoutes);   // Final reports + review logic
-
-// ✅ Root route for health check or basic testing
 app.get('/', (req, res) => {
   res.send('API is running...');
 });
 
-// ✅ Define the port from environment or fallback to 5002
-const PORT = process.env.PORT;
-
+const PORT = process.env.PORT || 5002;
 app.listen(PORT, () => {
   console.log(`✅ Server running and accessible on port ${PORT}`);
 });
