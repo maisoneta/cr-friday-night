@@ -9,7 +9,7 @@
   justify-content: space-around;
   background: var(--white);
   border-top: 2px solid var(--primary-blue);
-  padding: 0.6rem 0 0.5rem 0;
+  padding: 0.6rem 0.75rem 0.5rem 0.75rem; /* 🔥 UPDATED: add left/right padding */
   box-shadow: 0 -2px 18px rgba(22,76,136,0.06);
   z-index: 10;
 }
