@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import AppLayout from './components/AppLayout';
 
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ import ThankYouPage from './pages/ThankYouPage';
 
 const App = () => {
   return (
-    <BrowserRouter basename="/">
+    <HashRouter>
       <Routes>
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
@@ -22,9 +22,8 @@ const App = () => {
           <Route path="/thank-you" element={<ThankYouPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
-export default App; 
-
+export default App;
