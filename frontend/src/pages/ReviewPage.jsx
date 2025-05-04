@@ -81,7 +81,15 @@ const ReviewPage = () => {
 
   return (
     <div style={{ maxWidth: '700px', margin: '0 auto' }}>
-      <h2>Review & Finalize Report</h2>
+      <h2>Ministry Lead Review/Submit</h2>
+      <div style={{ backgroundColor: '#f0f8ff', padding: '1rem', borderRadius: '5px', marginBottom: '1rem' }}>
+        <strong>Instructions:</strong>
+        <ol style={{ paddingLeft: '1.2rem' }}>
+          <li>Select a Date</li>
+          <li>Review the numbers submitted and make any necessary changes or edits.</li>
+          <li>Hit the green <strong>"Submit Final Report"</strong> button</li>
+        </ol>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '1rem' }}>

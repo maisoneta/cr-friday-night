@@ -14,6 +14,7 @@ const AppLayout = () => {
       {/* Floating Add Button */}
       <button className="fab-button" onClick={() => navigate('/dynamic-entry')}>
         ➕
+        <span className="fab-label">Add Group Data</span>
       </button>
 
       <NavBar />

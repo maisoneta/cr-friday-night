@@ -5,17 +5,17 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ marginBottom: '1rem', color: '#333' }}>Celebrate Recovery Friday Night Tracker</h1>
+      <h1 style={{ marginBottom: '1rem', color: '#333' }}>Celebrate Recovery Friday Night Numbers</h1>
       <p style={{ maxWidth: '600px', margin: '0 auto 2rem', color: '#555' }}>
         Input attendance, donations, meals, baptisms for Celebrate Recovery
       </p>
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-        <Link to="/review">
-          <button style={buttonStyle}>✅ "M" Review & Finalize Report</button>
-        </Link>
         <Link to="/dynamic-entry">
-          <button style={buttonStyle}>🧑‍🤝‍🧑 Individual Team Data Entry</button>
+          <button style={buttonStyle}>🧑‍🤝‍🧑 Add Group Data</button>
+        </Link>
+        <Link to="/review">
+          <button style={buttonStyle}>📝 "M" Review/Submit</button>
         </Link>
         <Link to="/dashboard">
           <button style={buttonStyle}>📊 View Dashboard</button>

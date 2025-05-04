@@ -121,7 +121,12 @@ const DynamicEntryPage = () => {
   return (
     <div className="entry-page" style={{ display: 'flex', justifyContent: 'center' }}>
       <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '500px' }}>
-        <h2 style={{ textAlign: 'center' }}>Submit Celebrate Recovery Numbers</h2>
+        <h2 style={{ textAlign: 'center' }}>Log Your Group Data</h2>
+        <ul style={{ marginBottom: '1rem', paddingLeft: '1.25rem' }}>
+          <li>1. Select the Date</li>
+          <li>2. Pick the section you are reporting numbers</li>
+          <li>3. Hit the Submit button</li>
+        </ul>
 
         {/* Error box with scroll-into-view on duplicate */}
         {error && (
