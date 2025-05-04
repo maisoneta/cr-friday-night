@@ -92,3 +92,43 @@ select,
 textarea {
   font-size: 16px !important;
 }
+
+.table-scroll-container {
+  overflow-x: auto;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.table-scroll-container table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* adjust based on your table content */
+}
+
+.table-header {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--primary-blue);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.year-selector {
+  margin: 0.25rem 0 1rem 0;
+  text-align: center;
+}
+
+.year-selector label {
+  font-weight: 600;
+  color: var(--primary-blue);
+  margin-right: 0.5rem;
+}
+
+.year-selector select {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-blue);
+  background: var(--gray-accent);
+}

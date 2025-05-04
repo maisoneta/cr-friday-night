@@ -103,7 +103,8 @@ const CRDashboard = () => {
 
       {/* ✅ Last 12 Entries Table */}
       <h3 className="table-header">Last 12 Entries</h3>
-      <table className="cr-table">
+      <div className="table-scroll-container">
+     <table className="cr-table">
         <thead>
           <tr>
             {displayFields.map((field) => (
@@ -134,8 +135,12 @@ const CRDashboard = () => {
           ))}
         </tbody>
       </table>
+      </div>
 
-      {/* ✅ Year Selector */}
+            {/* ✅ YTD Totals and Averages Table */}
+      <h3 className="table-header">YTD Totals & Averages</h3>
+
+      {/* ✅ Year Selector - moved closer to this table */}
       <div className="year-selector">
         <label htmlFor="year">Select Year:</label>
         <select
@@ -148,10 +153,8 @@ const CRDashboard = () => {
           ))}
         </select>
       </div>
-
-      {/* ✅ YTD Totals and Averages Table */}
-      <h3 className="table-header">YTD Totals & Averages</h3>
-      <table className="cr-table">
+      <div className="table-scroll-container">
+       <table className="cr-table">
         <thead>
           <tr>
             <th>Type</th>
@@ -163,38 +166,39 @@ const CRDashboard = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Total</td>
-            {displayFields.map((field) =>
-              field.key !== 'date' && (
-                <td key={field.key}>
-                  {field.key.toLowerCase().includes('don') ||
-                  field.key.toLowerCase().includes('fund') ||
-                  field.key.toLowerCase().includes('book') ||
-                  field.key.toLowerCase().includes('food')
-                    ? `$${(totals[field.key] || 0).toFixed(2)}`
-                    : totals[field.key] || 0}
-                </td>
-              )
-            )}
-          </tr>
-          <tr>
-            <td>Average</td>
-            {displayFields.map((field) =>
-              field.key !== 'date' && (
-                <td key={field.key}>
-                  {field.key.toLowerCase().includes('don') ||
-                  field.key.toLowerCase().includes('fund') ||
-                  field.key.toLowerCase().includes('book') ||
-                  field.key.toLowerCase().includes('food')
-                    ? `$${parseFloat(averages[field.key] || 0).toFixed(2)}`
-                    : parseFloat(averages[field.key] || 0).toFixed(1)}
-                </td>
-              )
-            )}
-          </tr>
-        </tbody>
+            <tr>
+              <td>Average</td>
+              {displayFields.map((field) =>
+                field.key !== 'date' && (
+                  <td key={field.key}>
+                    {field.key.toLowerCase().includes('don') ||
+                    field.key.toLowerCase().includes('fund') ||
+                    field.key.toLowerCase().includes('book') ||
+                    field.key.toLowerCase().includes('food')
+                      ? `$${parseFloat(averages[field.key] || 0).toFixed(2)}`
+                      : parseFloat(averages[field.key] || 0).toFixed(1)}
+                  </td>
+                )
+              )}
+            </tr>
+            <tr>
+              <td>Total</td>
+              {displayFields.map((field) =>
+                field.key !== 'date' && (
+                  <td key={field.key}>
+                    {field.key.toLowerCase().includes('don') ||
+                    field.key.toLowerCase().includes('fund') ||
+                    field.key.toLowerCase().includes('book') ||
+                    field.key.toLowerCase().includes('food')
+                      ? `$${(totals[field.key] || 0).toFixed(2)}`
+                      : totals[field.key] || 0}
+                  </td>
+                )
+              )}
+            </tr>
+          </tbody>
       </table>
+    </div>
     </div>
   );
 };

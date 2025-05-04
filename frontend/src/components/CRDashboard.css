@@ -120,3 +120,17 @@ select#year {
 .legend-yellow {
   background: var(--warning-yellow);
 }
+
+.table-header {
+  text-align: center; /* ✅ Center headers */
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-blue);
+}
+
+.year-selector {
+  margin: 0.4rem 0 0.8rem 0; /* ✅ tighter spacing to the heading and table */
+  text-align: center;
+}
