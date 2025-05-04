@@ -119,10 +119,10 @@ const DynamicEntryPage = () => {
     fieldGroups[selectedOption].every(field => formData.hasOwnProperty(field));
 
   return (
-    <div className="entry-page" style={{ display: 'flex', justifyContent: 'center' }}>
+    <div className="entry-page" style={{ display: 'flex', justifyContent: 'center', padding: '1rem' }}>
       <form onSubmit={handleSubmit} style={{ width: '100%', maxWidth: '500px' }}>
-        <h2 style={{ textAlign: 'center' }}>Log Your Group Data</h2>
-        <ul style={{ marginBottom: '1rem', paddingLeft: '1.25rem' }}>
+        <h2 style={{ textAlign: 'center', fontSize: '1.5rem' }}>Log Your Group Data</h2>
+        <ul style={{ marginBottom: '1rem', paddingLeft: '1.25rem', fontSize: '1rem' }}>
           <li>1. Select the Date</li>
           <li>2. Pick the section you are reporting numbers</li>
           <li>3. Hit the Submit button</li>
@@ -148,24 +148,24 @@ const DynamicEntryPage = () => {
 
         {/* Date input */}
         <div style={{ marginBottom: '1rem' }}>
-          <label><strong>Date:</strong></label><br />
+          <label style={{ fontSize: '1rem', fontWeight: '600' }}><strong>Date:</strong></label><br />
           <input
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
             required
-            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+            style={{ width: '100%', padding: '0.75rem', marginTop: '0.25rem', fontSize: '1rem' }}
           />
         </div>
 
         {/* Section selector */}
         <div style={{ marginBottom: '1rem' }}>
-          <label><strong>Section:</strong></label><br />
+          <label style={{ fontSize: '1rem', fontWeight: '600' }}><strong>Section:</strong></label><br />
           <select
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
             required
-            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+            style={{ width: '100%', padding: '0.75rem', marginTop: '0.25rem', fontSize: '1rem' }}
           >
             <option value="">-- Select Section --</option>
             {Object.keys(fieldGroups).map((group) => (
@@ -177,13 +177,13 @@ const DynamicEntryPage = () => {
         {/* Dynamic fields based on selected section */}
         {selectedOption && fieldGroups[selectedOption].map((field) => (
           <div key={field} style={{ marginBottom: '0.75rem' }}>
-            <label>{formatLabel(field)}:</label><br />
+            <label style={{ fontSize: '1rem', fontWeight: '600' }}>{formatLabel(field)}:</label><br />
             <input
               type="number"
               value={formData[field] !== undefined ? formData[field] : ''}
               onChange={(e) => handleChange(field, e.target.value)}
               required
-              style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+              style={{ width: '100%', padding: '0.75rem', marginTop: '0.25rem', fontSize: '1rem' }}
             />
           </div>
         ))}
@@ -194,14 +194,15 @@ const DynamicEntryPage = () => {
           disabled={!isFormReady}
           style={{
             width: '100%',
-            padding: '0.75rem',
+            padding: '1rem',
             backgroundColor: isFormReady ? '#007bff' : '#ccc',
             color: 'white',
             fontWeight: 'bold',
+            fontSize: '1.1rem',
             border: 'none',
             borderRadius: '4px',
             cursor: isFormReady ? 'pointer' : 'not-allowed',
-            marginTop: '1rem'
+            marginTop: '1.25rem'
           }}
         >
           Submit

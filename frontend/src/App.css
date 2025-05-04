@@ -5,7 +5,7 @@
 /* === Entry Page Container ===
    Centers the form content and provides responsive padding. */
 .entry-page {
-  padding: 1.5rem 1rem; /* 🔥 More side padding for mobile layout */
+  padding: 2rem 1rem; /* Increase top and bottom padding */
   font-family: inherit;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,9 @@
   text-align: center;
   color: var(--primary-blue);
   font-weight: 700;
+  margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+  font-size: 1.6rem;
 }
 
 /* === Form Container ===
@@ -165,4 +167,11 @@ textarea {
   border-radius: 8px;
   border: 1px solid var(--primary-blue);
   background: var(--gray-accent);
+}
+@media (max-width: 500px) {
+  .entry-page input,
+  .entry-page select,
+  .entry-page label {
+    max-width: 100%;
+  }
 }

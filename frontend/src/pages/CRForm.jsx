@@ -55,8 +55,11 @@ const CRForm = ({ onSubmit }) => {
 
   return (
     <div className="entry-page">
-      <div className="w-full max-w-lg px-4"> {/* ✅ Small inner div for margin */}
-        <form onSubmit={handleSubmit} className="p-6 bg-white rounded-lg shadow-md space-y-4">
+      <div className="w-full max-w-md mx-auto px-4">
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Submit CR Friday Night Report
+        </h2>
+        <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md space-y-4 px-4 py-6">
           {/* ✅ Date Input */}
           <div>
             <label htmlFor="date" className="block font-medium">Date:</label>
