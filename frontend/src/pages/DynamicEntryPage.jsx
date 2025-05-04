@@ -101,10 +101,10 @@ const DynamicEntryPage = () => {
   };
 
   // Only enable submit if date, option, and all fields have a value
-  const isFormReady =
+    const isFormReady =
     date &&
     selectedOption &&
-    fieldGroups[selectedOption].every(field => formData[field] !== undefined && formData[field] !== '');
+    fieldGroups[selectedOption].every(field => formData.hasOwnProperty(field));
 
   return (
     <div className="entry-page" style={{ display: 'flex', justifyContent: 'center' }}>
@@ -160,7 +160,7 @@ const DynamicEntryPage = () => {
             <label>{formatLabel(field)}:</label><br />
             <input
               type="number"
-              value={formData[field] || ''}
+              value={formData[field] !== undefined ? formData[field] : ''}
               onChange={(e) => handleChange(field, e.target.value)}
               required
               style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
