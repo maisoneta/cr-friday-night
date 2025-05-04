@@ -1,22 +1,21 @@
-// ✅ Import Mongoose, which provides a schema-based solution to model MongoDB data
+// ✅ Import Mongoose: a MongoDB object modeling tool
 const mongoose = require('mongoose');
 
 // ✅ Define the schema for Celebrate Recovery Reports
 const CRReportSchema = new mongoose.Schema(
   {
-    // 📅 Date the report was created (typically represents a Friday CR night)
+    // ✅ Report Date
+    // The date of the Celebrate Recovery Friday night event
     date: {
       type: Date,
       required: true,
     },
 
-    // ✅ Large Group Attendance
+    // ✅ Attendance: Main Group & Children
     largeGroupChurch: {
       type: Number,
       default: 0,
     },
-
-    // ✅ Children & Workers (those present in childcare programs)
     children: {
       type: Number,
       default: 0,
@@ -26,90 +25,92 @@ const CRReportSchema = new mongoose.Schema(
       default: 0,
     },
 
-    // ✅ Miscellaneous Metrics
-    blueChips: {              // # of blue chips handed out (Newcomers)
+    // ✅ Participation Metrics
+    blueChips: {              // ✅ Blue Chips (first-time visitors)
       type: Number,
       default: 0,
     },
-    donations: {              // Dollar amount received as donations
-      type: Number,
-      default: 0,
-    },
-
-    // ✅ Small Group Participation
-    teens: {                  // # of teenagers attending The Landing
-      type: Number,
-      default: 0,
-    },
-    mensLifeIssues: {         // Men's Life Issues group attendance
-      type: Number,
-      default: 0,
-    },
-    mensAddiction: {          // Men's Addiction group attendance
-      type: Number,
-      default: 0,
-    },
-    womensAddiction: {        // Women's Addiction group attendance
-      type: Number,
-      default: 0,
-    },
-    womensLifeIssues: {       // Women's Life Issues group attendance
-      type: Number,
-      default: 0,
-    },
-    newBeginnings: {          // Newcomers orientation group
+    donations: {              // ✅ General donations collected
       type: Number,
       default: 0,
     },
 
-    // ✅ Special Metrics
-    baptisms: {               // # of baptisms during that session
+    // ✅ Small Group Attendance
+    teens: {                  // ✅ Teens attending The Landing
       type: Number,
       default: 0,
     },
-    mealsServed: {            // Total meals provided during the night
+    mensLifeIssues: {         // ✅ Men's Life Issues group
       type: Number,
       default: 0,
     },
-    bookSales: {              // Amount received from Celebrate Recovery book sales
+    mensAddiction: {          // ✅ Men's Addiction group
       type: Number,
       default: 0,
     },
-    salesFromBooks: {         // Same amount stored under consistent backend name
+    womensAddiction: {        // ✅ Women's Addiction group
       type: Number,
       default: 0,
     },
-    foodDonation: {           // Dollar value of donated food
+    womensLifeIssues: {       // ✅ Women's Life Issues group
       type: Number,
       default: 0,
     },
-    stepStudyGraduates: {
+    newBeginnings: {          // ✅ Newcomers orientation group
       type: Number,
       default: 0,
     },
-    totalFunds: {
+
+    // ✅ Special Events & Activity Metrics
+    baptisms: {               // ✅ Baptisms held during this session
       type: Number,
       default: 0,
     },
-    // ✅ Admin-only: mark report as approved or not
-    approved: {
+    mealsServed: {            // ✅ Meals served during the evening
+      type: Number,
+      default: 0,
+    },
+    bookSales: {              // ✅ Sales from Celebrate Recovery books
+      type: Number,
+      default: 0,
+    },
+    salesFromBooks: {         // ✅ Duplicate tracking for book sales (used in some reports)
+      type: Number,
+      default: 0,
+    },
+    foodDonation: {           // ✅ Estimated dollar value of food donated
+      type: Number,
+      default: 0,
+    },
+    stepStudyGraduates: {     // ✅ Number of Step Study graduates
+      type: Number,
+      default: 0,
+    },
+
+    // ✅ Calculated Summary Fields
+    totalFunds: {             // ✅ Total monetary contributions (donations + books + food)
+      type: Number,
+      default: 0,
+    },
+    totalAttendance: {        // ✅ Total of largeGroupChurch + children + childrenWorkers
+      type: Number,
+      default: 0,
+    },
+    totalSmallGroup: {        // ✅ Sum of all small group participants
+      type: Number,
+      default: 0,
+    },
+
+    // ✅ Admin Controls
+    approved: {               // ✅ Indicates if report has been reviewed and approved
       type: Boolean,
       default: false,
     },
-    totalAttendance: {
-      type: Number,
-      default: 0,
-    },
-    totalSmallGroup: {
-      type: Number,
-      default: 0,
-    },
-
   },
   {
-    timestamps: true, // Automatically adds `createdAt` and `updatedAt` fields to each document
+    timestamps: true, // ✅ Automatically add `createdAt` and `updatedAt` timestamps
   }
 );
 
-// ✅ Export the Mongoose model for use in routes/controllers
+// ✅ Export the Mongoose model so it can be used in routes and controllers
 module.exports = mongoose.model('CRReport', CRReportSchema);
