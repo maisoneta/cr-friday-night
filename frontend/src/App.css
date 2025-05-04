@@ -1,6 +1,11 @@
-/* === Entry Page Styling === */
+/* ==========================================================
+   App.css - Styling for Entry Form Pages and Shared Elements
+   ========================================================== */
+
+/* === Entry Page Container ===
+   Centers the form content and provides responsive padding. */
 .entry-page {
-  padding: 1.5rem 1rem; /* 🔥 Updated: more padding on sides for mobile */
+  padding: 1.5rem 1rem; /* 🔥 More side padding for mobile layout */
   font-family: inherit;
   display: flex;
   flex-direction: column;
@@ -8,6 +13,8 @@
   background: var(--background-light);
 }
 
+/* === Page Header Styling ===
+   Styles the h2 title on entry pages. */
 .entry-page h2 {
   text-align: center;
   color: var(--primary-blue);
@@ -15,6 +22,8 @@
   margin-bottom: 1.5rem;
 }
 
+/* === Form Container ===
+   Styles the form card layout, centering elements and applying padding and shadows. */
 .entry-page form {
   width: 100%;
   max-width: 500px;
@@ -28,6 +37,8 @@
   border: 1px solid var(--gray-accent);
 }
 
+/* === Label Styling ===
+   Adds spacing and color to form labels. */
 .entry-page label {
   margin: 1rem 0 0.25rem 0;
   font-weight: 500;
@@ -37,18 +48,23 @@
   max-width: 400px;
 }
 
+/* === Inputs and Select Dropdowns ===
+   Shared styling for all input and select fields in the form. */
 .entry-page select,
 .entry-page input {
   width: 100%;
   max-width: 400px;
   padding: 0.65rem;
-  font-size: clamp(16px, 1.05rem, 18px); /* 🔥 Prevent iOS zoom + scale smartly */
+  font-size: clamp(16px, 1.05rem, 18px); /* 🔥 Smart font scaling across devices */
   border: 1.5px solid var(--primary-blue);
   border-radius: 10px;
   margin-bottom: 1.1rem;
   background: var(--gray-accent);
   transition: border 0.2s;
 }
+
+/* === Focus Styles ===
+   Highlight fields on focus. */
 .entry-page select:focus,
 .entry-page input:focus {
   outline: none;
@@ -56,6 +72,8 @@
   box-shadow: 0 0 4px var(--primary-blue, #164c88);
 }
 
+/* === Submit Button ===
+   Styled button for form submission. */
 .entry-page button[type="submit"] {
   background: var(--primary-blue);
   color: var(--white);
@@ -72,18 +90,22 @@
   transition: background 0.2s;
 }
 
+/* === Submit Button Hover ===
+   Darkens the button on hover. */
 .entry-page button[type="submit"]:hover {
   background: var(--orange-dark);
 }
 
-/* 🔥 Extra: Better Mobile Padding for Tiny Screens */
+/* === Mobile Padding Adjustments ===
+   Target devices smaller than 400px wide. */
 @media (max-width: 400px) {
   .entry-page {
-    padding: 1.5rem 1.2rem; /* Slightly wider padding on tiny phones */
+    padding: 1.5rem 1.2rem; /* Slightly more padding for very small screens */
   }
 }
 
-/* 🔒 Hard enforcement for ALL form inputs on mobile */
+/* === Input Font Enforcement for Mobile ===
+   Prevents zooming and maintains uniform font size. */
 input[type="text"],
 input[type="number"],
 input[type="email"],
@@ -93,18 +115,24 @@ textarea {
   font-size: 16px !important;
 }
 
+/* === Scrollable Table Container ===
+   Wraps tables to allow horizontal scroll on small screens. */
 .table-scroll-container {
   overflow-x: auto;
   width: 100%;
   margin-bottom: 1.5rem;
 }
 
+/* === Table Base Styling ===
+   Ensures tables have minimum width and consistent styling. */
 .table-scroll-container table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 600px; /* adjust based on your table content */
+  min-width: 600px; /* Allow room for data columns */
 }
 
+/* === Section Headers ===
+   Used for table and section headers to stand out. */
 .table-header {
   text-align: center;
   font-weight: 700;
@@ -114,17 +142,23 @@ textarea {
   margin-bottom: 1rem;
 }
 
+/* === Year Selector Wrapper ===
+   Centers and spaces the year dropdown control. */
 .year-selector {
   margin: 0.25rem 0 1rem 0;
   text-align: center;
 }
 
+/* === Year Selector Label ===
+   Styling for the label next to the dropdown. */
 .year-selector label {
   font-weight: 600;
   color: var(--primary-blue);
   margin-right: 0.5rem;
 }
 
+/* === Year Selector Dropdown ===
+   Styling for the select input in the year selector. */
 .year-selector select {
   padding: 0.4rem 0.6rem;
   font-size: 1rem;

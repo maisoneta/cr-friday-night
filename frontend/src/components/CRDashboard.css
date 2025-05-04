@@ -1,11 +1,15 @@
-/* CRDashboard.css */
+/* ==========================================================================
+   CRDashboard.css — Styling for Celebrate Recovery Dashboard Page
+   ========================================================================== */
 
+/* === Container styling for entire dashboard view === */
 .cr-dashboard {
   font-family: inherit;
   padding: 2rem 0.5rem;
   background: var(--background-light);
 }
 
+/* === Page title styling === */
 .dashboard-title {
   font-size: 2.2rem;
   font-weight: bold;
@@ -15,15 +19,18 @@
   letter-spacing: 1px;
 }
 
+/* === Section headers above tables === */
 .table-header {
-  font-size: 1.18rem;
-  margin-top: 1.8rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.4rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
   color: var(--primary-blue);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
+  text-align: center;
 }
 
+/* === Table styling for data display === */
 .cr-table {
   width: 100%;
   border-collapse: collapse;
@@ -34,6 +41,7 @@
   background: var(--white);
 }
 
+/* === Cell styling for all table rows and headers === */
 .cr-table th,
 .cr-table td {
   border: 1px solid var(--gray-accent);
@@ -41,6 +49,7 @@
   text-align: center;
 }
 
+/* === Specific header cell enhancements (stickiness and background) === */
 .cr-table th {
   background: var(--table-header);
   font-weight: bold;
@@ -50,14 +59,17 @@
   z-index: 1;
 }
 
+/* === Zebra striping for better readability === */
 .cr-table tbody tr:nth-child(even) {
   background: var(--gray-accent);
 }
 
+/* === Hover effect for row highlighting === */
 .cr-table tbody tr:hover {
   background: var(--background-light);
 }
 
+/* === Dropdown selector styling for year filter === */
 .year-selector {
   margin-bottom: 1.3rem;
   text-align: center;
@@ -78,17 +90,20 @@ select#year {
   color: var(--text-dark);
 }
 
+/* === Styling for data points above average === */
 .above-average {
   background: var(--success-green);
   font-weight: bold;
   box-shadow: inset 0 0 4px #c4e2c7;
 }
 
+/* === Styling for data points below average === */
 .below-average {
   background: var(--warning-yellow);
   box-shadow: inset 0 0 4px #f3edae;
 }
 
+/* === Color-coded legend to explain highlight colors === */
 .legend {
   display: flex;
   justify-content: center;
@@ -99,12 +114,14 @@ select#year {
   color: var(--gray-medium);
 }
 
+/* === Flex layout for each item inside the legend === */
 .legend span {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
+/* === Small colored box that indicates status in the legend === */
 .legend-box {
   width: 18px;
   height: 18px;
@@ -113,24 +130,11 @@ select#year {
   border: 1px solid #b8b8b8;
 }
 
+/* === Background colors for legend status boxes === */
 .legend-green {
   background: var(--success-green);
 }
 
 .legend-yellow {
   background: var(--warning-yellow);
-}
-
-.table-header {
-  text-align: center; /* ✅ Center headers */
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  color: var(--primary-blue);
-}
-
-.year-selector {
-  margin: 0.4rem 0 0.8rem 0; /* ✅ tighter spacing to the heading and table */
-  text-align: center;
 }
