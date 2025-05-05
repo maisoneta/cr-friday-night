@@ -98,7 +98,7 @@ const GraphsPage = () => {
     },
     plugins: {
       legend: { position: 'top' },
-      title: { display: true, text: 'Large Group Attendance - Current Year' }
+      title: { display: true, text: 'Large Group (Chapel) Attendance - Current Year' }
     },
     scales: {
       x: { title: { display: true, text: 'Date' } },
