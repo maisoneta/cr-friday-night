@@ -11,7 +11,7 @@ const NavBar = () => {
       </NavLink>
       <NavLink to="/review" className="nav-item">
         <span role="img" aria-label="review">📝</span>
-        <span>"M" Review/Submit</span>
+        <span>Review/Submit</span>
       </NavLink>
       <NavLink to="/dashboard" className="nav-item">
         <span role="img" aria-label="dashboard">📊</span>

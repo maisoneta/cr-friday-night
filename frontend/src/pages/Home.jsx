@@ -26,7 +26,7 @@ const Home = () => {
           <button style={buttonStyle}>🧑‍🤝‍🧑 Add Group Data</button>
         </Link>
         <Link to="/review">
-          <button style={buttonStyle}>📝 "M" Review/Submit</button>
+          <button style={buttonStyle}>📝 Review/Submit</button>
         </Link>
         <Link to="/dashboard">
           <button style={buttonStyle}>📊 View Dashboard</button>

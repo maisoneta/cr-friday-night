@@ -75,6 +75,9 @@ const GraphsPage = () => {
   return (
     <div className="entry-page">
       <h2 style={{ textAlign: 'center' }}>📈 Graphs & Visuals</h2>
+      <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#555', marginTop: '-0.5rem' }}>
+        Tip: If viewing on phone rotate for best viewing.
+      </p>
       {loading ? (
         <p>Loading chart...</p>
       ) : (
