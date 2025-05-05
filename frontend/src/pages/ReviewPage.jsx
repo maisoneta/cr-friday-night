@@ -119,9 +119,20 @@ const ReviewPage = () => {
           </div>
         ))}
 
-        <button type="submit" style={{ marginTop: '1rem', padding: '0.6rem 1.2rem', backgroundColor: '#4CAF50', color: 'white', border: 'none', borderRadius: '5px' }}>
-          ✅ Submit Final Report
-        </button>
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+          <button
+            type="submit"
+            style={{
+              padding: '0.6rem 1.2rem',
+              backgroundColor: '#4CAF50',
+              color: 'white',
+              border: 'none',
+              borderRadius: '5px'
+            }}
+          >
+            ✅ Submit Final Report
+          </button>
+        </div>
       </form>
     </div>
   );
