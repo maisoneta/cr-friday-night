@@ -14,6 +14,7 @@ import CRDashboard from './pages/CRDashboard';
 import ReviewPage from './pages/ReviewPage';
 import DynamicEntryPage from './pages/DynamicEntryPage';
 import ThankYouPage from './pages/ThankYouPage';
+import GraphsPage from './pages/GraphsPage';
 
 /*
  * Main App component:
@@ -35,6 +36,7 @@ const App = () => {
           <Route path="/review" element={<ReviewPage />} />        {/* Review and finalize page */}
           <Route path="/dynamic-entry" element={<DynamicEntryPage />} />  {/* Individual entry input route */}
           <Route path="/thank-you" element={<ThankYouPage />} />   {/* Thank you confirmation page */}
+          <Route path="/graphs" element={<GraphsPage />} />  {/* Graphs visualization page */}
         </Route>
       </Routes>
     </HashRouter>

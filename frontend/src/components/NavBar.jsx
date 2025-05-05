@@ -17,6 +17,10 @@ const NavBar = () => {
         <span role="img" aria-label="dashboard">📊</span>
         <span>Dashboard</span>
       </NavLink>
+      <NavLink to="/graphs" className="nav-item">
+        <span role="img" aria-label="graphs">📈</span>
+        <span>Graphs</span>
+      </NavLink>
     </nav>
   );
 };

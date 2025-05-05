@@ -31,6 +31,9 @@ const Home = () => {
         <Link to="/dashboard">
           <button style={buttonStyle}>📊 View Dashboard</button>
         </Link>
+        <Link to="/graphs">
+          <button style={buttonStyle}>📈 Graphs</button>
+        </Link>
       </div>
     </div>
   );
