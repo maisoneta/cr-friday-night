@@ -1,14 +1,25 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
+import CRLogo from '../assets/CR_CanyonRidge_Logo.png';
 
 const Home = () => {
   return (
     <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
-      <h1 style={{ marginBottom: '1rem', color: '#333' }}>Celebrate Recovery Friday Night Numbers</h1>
+      <img
+        src={CRLogo}
+        alt="Canyon Ridge Celebrate Recovery Logo"
+        style={{
+          width: '120px',
+          height: 'auto',
+          marginBottom: '1rem',
+        }}
+      />
+      {/*
+      <h1 style={{ marginBottom: '1rem', color: '#333' }}>Data Portal</h1>
       <p style={{ maxWidth: '600px', margin: '0 auto 2rem', color: '#555' }}>
         Input attendance, donations, meals, baptisms for Celebrate Recovery
       </p>
+      */}
 
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
         <Link to="/dynamic-entry">
