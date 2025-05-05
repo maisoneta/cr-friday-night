@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "chartjs-plugin-datalabels": "^2.2.0",
     "mongodb": "^6.15.0"
   }
 }

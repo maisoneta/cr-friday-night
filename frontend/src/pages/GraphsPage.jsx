@@ -66,7 +66,14 @@ const GraphsPage = () => {
         tension: 0.3,
         datalabels: {
           display: true,
-          offset: -20
+          anchor: 'end',
+          align: 'top',
+          offset: -6,
+          font: {
+            weight: 'bold',
+            size: 14
+          },
+          color: '#000'
         }
       },
       {
@@ -121,16 +128,16 @@ const GraphsPage = () => {
       legend: { position: 'top' },
       title: { display: true, text: 'Yearly Averages Comparison' },
       datalabels: {
-        anchor: 'start',
-        align: 'center',
+        anchor: 'end',
+        align: 'start',
         clamp: true,
-        offset: -25,
+        offset: -8,
         formatter: value => Math.round(value),
         font: {
           weight: 'bold',
-          size: 12
+          size: 15
         },
-        color: '#333'
+        color: '#000'
       }
     },
     scales: {
