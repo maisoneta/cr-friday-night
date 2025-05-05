@@ -9,10 +9,6 @@ const NavBar = () => {
         <span role="img" aria-label="home">🏠</span>
         <span>Home</span>
       </NavLink>
-      <NavLink to="/dynamic-entry" className="nav-item">
-        <span role="img" aria-label="group">🧑‍🤝‍🧑</span>
-        <span>Add Group Data</span>
-      </NavLink>
       <NavLink to="/review" className="nav-item">
         <span role="img" aria-label="review">📝</span>
         <span>"M" Review/Submit</span>

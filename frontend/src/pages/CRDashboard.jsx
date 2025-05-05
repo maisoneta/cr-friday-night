@@ -6,6 +6,7 @@ import { API_BASE_URL } from '../config'; // Base API URL for backend communicat
 const CRDashboard = () => {
   // Stores the full list of reports from the backend
   const [reports, setReports] = useState([]);
+  const [allReports, setAllReports] = useState([]);
   // Stores the currently selected year to filter data
   const [displayYear, setDisplayYear] = useState(new Date().getFullYear());
   // Stores all unique years found in report data
@@ -24,7 +25,8 @@ const CRDashboard = () => {
 
         // Sort reports by date (newest first) and limit to last 12
         const sorted = [...data].sort((a, b) => new Date(b.date) - new Date(a.date));
-        setReports(sorted.slice(0, 12));
+        setAllReports(data); // full dataset for other calculations
+        setReports(sorted.slice(0, 12)); // last 12 entries only
 
         // Extract and sort all unique years
         const years = Array.from(new Set(data.map(r => new Date(r.date).getFullYear()))).sort((a, b) => b - a);
@@ -107,6 +109,24 @@ const CRDashboard = () => {
       return typeof value === 'number' ? value : value || '';
     }
   };
+
+  // Calculate overall averages for all years/fields for highlighting in YoY table
+  const allFieldSums = {};
+  const allFieldCounts = {};
+
+  allReports.forEach((r) => {
+    Object.keys(r).forEach((key) => {
+      if (typeof r[key] === 'number') {
+        allFieldSums[key] = (allFieldSums[key] || 0) + r[key];
+        allFieldCounts[key] = (allFieldCounts[key] || 0) + 1;
+      }
+    });
+  });
+
+  const overallAverages = {};
+  Object.keys(allFieldSums).forEach((key) => {
+    overallAverages[key] = allFieldSums[key] / allFieldCounts[key];
+  });
 
   return (
     <div className="cr-dashboard">
@@ -218,8 +238,77 @@ const CRDashboard = () => {
           </tbody>
         </table>
       </div>
+    {/* Year-over-Year Averages Table */}
+    <h3 className="table-header">Year-over-Year Averages</h3>
+    <div className="table-scroll-container">
+      <table className="cr-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            {displayFields.map((field) =>
+              field.key !== 'date' && <th key={field.key}>{field.label}</th>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {allYears.map((year) => {
+            const yearReports = allReports.filter(
+              (r) => new Date(r.date).getFullYear() === year
+            );
+            const count = yearReports.length;
+            const yearlyTotal = {};
+            const yearlyAvg = {};
+
+            // Calculate totals per field
+            yearReports.forEach((r) => {
+              Object.keys(r).forEach((key) => {
+                if (typeof r[key] === 'number') {
+                  yearlyTotal[key] = (yearlyTotal[key] || 0) + r[key];
+                }
+              });
+            });
+
+            // Convert totals to averages
+            Object.keys(yearlyTotal).forEach((key) => {
+              yearlyAvg[key] = (yearlyTotal[key] / count).toFixed(1);
+            });
+
+            return (
+              <tr key={year}>
+                <td>{year}</td>
+                {displayFields.map((field) =>
+                  field.key !== 'date' ? (
+                    <td
+                      key={field.key}
+                      className={
+                        typeof yearlyAvg[field.key] === 'string' &&
+                        !isNaN(parseFloat(yearlyAvg[field.key])) &&
+                        !isNaN(overallAverages[field.key])
+                          ? parseFloat(yearlyAvg[field.key]) > overallAverages[field.key]
+                            ? 'above-average'
+                            : parseFloat(yearlyAvg[field.key]) < overallAverages[field.key]
+                            ? 'below-average'
+                            : ''
+                          : ''
+                      }
+                    >
+                      {field.key.toLowerCase().includes('don') ||
+                      field.key.toLowerCase().includes('fund') ||
+                      field.key.toLowerCase().includes('book') ||
+                      field.key.toLowerCase().includes('food')
+                        ? `$${parseFloat(yearlyAvg[field.key] || 0).toFixed(2)}`
+                        : parseFloat(yearlyAvg[field.key] || 0).toFixed(1)}
+                    </td>
+                  ) : null
+                )}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
-  );
+  </div>
+);
 };
 
 export default CRDashboard;
