@@ -1,5 +1,6 @@
 // ✅ Import necessary dependencies
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 // ✅ CRForm handles input from the user for a new Celebrate Recovery report
 const CRForm = ({ onSubmit }) => {
@@ -22,6 +23,27 @@ const CRForm = ({ onSubmit }) => {
     baptisms: '',
   });
 
+  const [existingDates, setExistingDates] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
+
+  useEffect(() => {
+    axios.get('/api/reports')
+      .then(response => {
+        const dateMap = {};
+        response.data.forEach(item => {
+          if (item.date) {
+            const dateKey = new Date(item.date).toISOString().split('T')[0];
+            console.log('Fetched dateKey:', dateKey); // ✅ Log for debugging
+            dateMap[dateKey] = true;
+          }
+        });
+        setExistingDates(dateMap);
+      })
+      .catch(error => {
+        console.error('Error fetching existing reports:', error);
+      });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -32,6 +54,21 @@ const CRForm = ({ onSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const dateKey = new Date(formData.date).toISOString().split('T')[0];
+    console.log('Submitting for dateKey:', dateKey); // ✅ Log for debugging
+
+    if (existingDates[dateKey]) {
+      setErrorMessage('Numbers have already been submitted for this date.');
+      return;
+    }
+
+    const hasAnyValue = Object.entries(formData).some(([key, value]) => key !== 'date' && value && value !== '0');
+    if (!hasAnyValue) {
+      setErrorMessage('Please enter at least one number before submitting.');
+      return;
+    }
+
+    setErrorMessage('');
     onSubmit(formData);
     setFormData({
       date: '',
@@ -59,6 +96,11 @@ const CRForm = ({ onSubmit }) => {
         <h2 className="text-2xl font-bold text-center mb-6">
           Submit CR Friday Night Report
         </h2>
+        {errorMessage && (
+          <div className="bg-red-100 text-red-700 px-4 py-2 rounded mb-4">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md space-y-4 px-4 py-6">
           {/* ✅ Date Input */}
           <div>

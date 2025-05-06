@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 
 const fieldLabels = {
@@ -26,6 +25,7 @@ const ReviewPage = () => {
   // const [entries, setEntries] = useState([]);
   const [finalReport, setFinalReport] = useState({});
   const [status, setStatus] = useState({});
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (!selectedDate) return;
@@ -64,18 +64,31 @@ const ReviewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`${process.env.REACT_APP_API_URL}/api/reports`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/reports`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...finalReport, date: selectedDate })
       });
 
-      alert('✅ Final report submitted!');
+      if (response.status === 409) {
+        const data = await response.json();
+        setErrorMessage(data.message || 'Duplicate submission not allowed.');
+        return;
+      }
+
+      if (!response.ok) {
+        const data = await response.json();
+        setErrorMessage(data.message || 'An unexpected error occurred.');
+        return;
+      }
+
+      setErrorMessage('✅ Final report submitted!');
       setFinalReport({});
       setSelectedDate('');
       setStatus({});
     } catch (err) {
       console.error('Submission error:', err);
+      setErrorMessage('An unexpected error occurred.');
     }
   };
 
@@ -90,6 +103,12 @@ const ReviewPage = () => {
           <li>Hit the green <strong>"Submit Final Report"</strong> button</li>
         </ol>
       </div>
+
+      {errorMessage && (
+        <div style={{ backgroundColor: '#ffe6e6', color: '#cc0000', padding: '0.75rem', marginBottom: '1rem', borderRadius: '5px' }}>
+          {errorMessage}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div style={{ marginBottom: '1rem' }}>

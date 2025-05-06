@@ -18,6 +18,13 @@ router.post('/', async (req, res) => {
     // ✅ Log the raw incoming report body to help with debugging
     console.log('🚀 Incoming report:', req.body);
 
+    // 🔒 Check if a report already exists for the same date
+    const { date } = req.body;
+    const existingReport = await CRReport.findOne({ date });
+    if (existingReport) {
+      return res.status(409).json({ message: 'A report has already been submitted for this date.' });
+    }
+
   try {
     const {
       date,
