@@ -19,8 +19,20 @@ connectDB();
 // ✅ Initialize the Express app
 const app = express();
 
+const allowedOrigins = [
+  'https://cr-friday-night-frontend.onrender.com',
+  'http://localhost:3000',
+  'http://192.168.50.98:3000'
+];
+
 app.use(cors({
-  origin: '*',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
 app.use(express.json());
