@@ -1,10 +1,19 @@
+// File: frontend/src/pages/ThankYouPage.jsx
+
+/*
+  ThankYouPage displays a confirmation message after form submission.
+  Shows submitted date and field values.
+  Provides navigation buttons to return home or submit another entry.
+*/
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
 
+// Access location state to retrieve submitted date and field data
 const ThankYouPage = () => {
   const location = useLocation();
   const { date, fields } = location.state || {};
 
+  // Render thank-you message, submitted values, and navigation options
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem' }}>
       <h2>🎉 Thank You for Submitting!</h2>

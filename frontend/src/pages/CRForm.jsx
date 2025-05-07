@@ -1,9 +1,19 @@
+// File: frontend/src/pages/CRForm.jsx
+
+/*
+  CRForm is the main input form for entering Celebrate Recovery Friday night data.
+  - Checks for duplicate submissions by date
+  - Requires at least one non-zero input before submitting
+  - Sends data to parent handler via onSubmit
+*/
+
 // ✅ Import necessary dependencies
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // ✅ CRForm handles input from the user for a new Celebrate Recovery report
 const CRForm = ({ onSubmit }) => {
+  // Form state
   const [formData, setFormData] = useState({
     date: '',
     largeGroupChurch: '',
@@ -23,9 +33,11 @@ const CRForm = ({ onSubmit }) => {
     baptisms: '',
   });
 
+  // Date validation helpers
   const [existingDates, setExistingDates] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Load existing report dates to prevent duplicate submissions
   useEffect(() => {
     axios.get('/api/reports')
       .then(response => {
@@ -44,6 +56,7 @@ const CRForm = ({ onSubmit }) => {
       });
   }, []);
 
+  // Update form data as user types
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -52,6 +65,7 @@ const CRForm = ({ onSubmit }) => {
     }));
   };
 
+  // Validate and submit form data
   const handleSubmit = (e) => {
     e.preventDefault();
     const dateKey = new Date(formData.date).toISOString().split('T')[0];
@@ -90,6 +104,7 @@ const CRForm = ({ onSubmit }) => {
     });
   };
 
+  // Render form layout and fields
   return (
     <div className="entry-page">
       <div className="w-full max-w-md mx-auto px-4">

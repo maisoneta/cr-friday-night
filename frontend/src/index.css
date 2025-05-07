@@ -1,4 +1,10 @@
-/* index.css */
+/* File: frontend/src/index.css
+
+   Global styles and CSS variable definitions for the Celebrate Recovery app.
+   Includes root theme variables, base font settings, and background color.
+*/
+
+/* CSS variables for color theme and reusable values */
 :root {
   --primary-blue: #164c88;
   --background-light: #e9f1fa;
@@ -14,6 +20,7 @@
   --orange-dark: #ff9900;
 }
 
+/* Global body styles including font stack and background color */
 body {
   margin: 0;
   font-family: 'Inter', 'Roboto', 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Oxygen',
@@ -25,6 +32,7 @@ body {
   color: var(--text-dark);
 }
 
+/* Monospace font stack for inline <code> elements */
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

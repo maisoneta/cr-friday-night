@@ -1,3 +1,14 @@
+// File: frontend/src/pages/ReviewPage.jsx
+
+/*
+  ReviewPage allows the Ministry Lead to:
+  - Select a date to load pending report data
+  - Review and optionally edit each field's value
+  - Submit the finalized report to the backend
+  Displays visual indicators for missing or edited fields.
+*/
+
+// Map of internal keys to user-friendly field labels
 import React, { useEffect, useState } from 'react';
 
 const fieldLabels = {
@@ -21,12 +32,17 @@ const fieldLabels = {
 };
 
 const ReviewPage = () => {
+  // Selected date to review
   const [selectedDate, setSelectedDate] = useState('');
-  // const [entries, setEntries] = useState([]);
+
+  // Final report object and field statuses
   const [finalReport, setFinalReport] = useState({});
   const [status, setStatus] = useState({});
+
+  // Error or success message display
   const [errorMessage, setErrorMessage] = useState('');
 
+  // Fetch pending report data for selected date
   useEffect(() => {
     if (!selectedDate) return;
 
@@ -55,12 +71,14 @@ const ReviewPage = () => {
     fetchPendingData();
   }, [selectedDate]);
 
+  // Update final report values and mark fields as edited
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFinalReport(prev => ({ ...prev, [name]: value }));
     setStatus(prev => ({ ...prev, [name]: 'edited' }));
   };
 
+  // Submit finalized report to backend with error handling
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -92,6 +110,7 @@ const ReviewPage = () => {
     }
   };
 
+  // Render instruction box, date picker, editable inputs, and submit button
   return (
     <div style={{ maxWidth: '700px', margin: '0 auto' }}>
       <h2>Ministry Lead Review/Submit</h2>

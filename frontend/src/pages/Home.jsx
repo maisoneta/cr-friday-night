@@ -1,8 +1,19 @@
+// File: frontend/src/pages/Home.jsx
+
+/*
+  Home page for the Celebrate Recovery app.
+  Displays logo and navigation buttons linking to:
+  - Group data entry
+  - Review and submission
+  - Dashboard overview
+  - Graph visualizations
+*/
 import React from 'react';
 import { Link } from 'react-router-dom';
 import CRLogo from '../assets/CR_CanyonRidge_Logo.png';
 
 const Home = () => {
+  // Render logo and navigation button layout
   return (
     <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
       <img
@@ -39,6 +50,7 @@ const Home = () => {
   );
 };
 
+// Shared button styles for all homepage links
 const buttonStyle = {
   padding: '1rem 1.5rem',
   fontSize: '1rem',

@@ -1,5 +1,8 @@
+/* File: frontend/src/components/NavBAR.css */
+
 /* NavBAR.css */
 
+/* Bottom navigation bar styling */
 .navbar {
   position: fixed;
   bottom: 0;
@@ -14,6 +17,7 @@
   z-index: 10;
 }
 
+/* Styles for individual nav links */
 .nav-item {
   color: var(--primary-blue);
   font-size: 1rem;
@@ -28,6 +32,7 @@
   transition: background 0.2s, color 0.2s;
 }
 
+/* Styles for the active nav link */
 .nav-item.active {
   background: var(--primary-blue);
   color: var(--white);
@@ -37,13 +42,14 @@
   box-shadow: 0 2px 10px rgba(22,76,136,0.10);
 }
 
+/* Responsive: hide label text on very small screens */
 @media (max-width: 360px) {
   .nav-item span:last-child {
     display: none;
   }
 }
 
-/* Floating Action Button (FAB) */
+/* Floating Action Button (FAB) styling */
 .fab-button {
   position: fixed;
   bottom: 80px;
@@ -61,10 +67,12 @@
   display: flex;
   align-items: center;
 }
+/* Hover effect for FAB */
 .fab-button:hover {
   background: var(--orange-dark);
 }
 
+/* Text label next to FAB icon */
 .fab-label {
   font-size: 1rem;
   line-height: 1;

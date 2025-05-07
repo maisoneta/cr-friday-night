@@ -1,6 +1,15 @@
+// File: frontend/src/pages/DynamicEntryPage.jsx
+
+/*
+  HighestSingleDayValueTable component renders a table showing
+  the highest recorded value per category with associated date.
+  Used in the CRDashboard to highlight peak single-day statistics.
+*/
+
 import React from 'react';
 
 const HighestSingleDayValueTable = ({ data }) => {
+  // Map of short codes to full descriptive labels for categories
   // Mapping of abbreviations to verbose labels
   const categoryLabels = {
     'LgGp': 'Large Gp/Children/Workers',
@@ -24,6 +33,7 @@ const HighestSingleDayValueTable = ({ data }) => {
     'Grad': 'Graduates'
   };
 
+  // Render a simple 3-column table showing category, value, and date
   return (
     <table>
       <thead>

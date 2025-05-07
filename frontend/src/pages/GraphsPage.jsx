@@ -1,3 +1,13 @@
+// File: frontend/src/pages/GraphsPage.jsx
+
+/*
+  GraphsPage shows two key visualizations:
+  - Line chart of weekly large group attendance
+  - Bar chart comparing current and previous year averages
+
+  Data is pulled from the backend and filtered by year.
+  Chart.js and chartjs-plugin-datalabels are used for styling and display.
+*/
 import React, { useEffect, useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler } from 'chart.js';
@@ -7,6 +17,7 @@ import { API_BASE_URL } from '../config';
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler);
 ChartJS.register(ChartDataLabels);
 
+// Fetch report data and calculate yearly averages
 const GraphsPage = () => {
   const [reportData, setReportData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -50,10 +61,12 @@ const GraphsPage = () => {
     fetchReports();
   }, []);
 
+  // Calculate average large group attendance for current year
   const average = reportData.length > 0
     ? reportData.reduce((sum, entry) => sum + entry.largeGroupChurch, 0) / reportData.length
     : 0;
 
+  // Configuration for the line chart
   const chartData = {
     labels: reportData.map(entry => new Date(entry.date).toLocaleDateString()),
     datasets: [
@@ -106,6 +119,7 @@ const GraphsPage = () => {
     }
   };
 
+  // Configuration for the bar chart comparing yearly averages
   const barChartData = {
     labels: yearlyAverages.labels || [],
     datasets: [
@@ -146,6 +160,7 @@ const GraphsPage = () => {
     }
   };
 
+  // Render both charts inside styled containers
   return (
     <div className="entry-page">
       <h2 style={{ textAlign: 'center' }}>📈 Graphs & Visuals</h2>

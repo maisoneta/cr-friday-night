@@ -1,8 +1,14 @@
-
+// File: backend/utils/sendEmail.js
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-// ✅ Create transport using Gmail + App Password
+/*
+  Utility function to send the Celebrate Recovery Final Report email.
+  Formats the input data into an HTML email with totals calculated.
+  Uses Nodemailer with Gmail App Password authentication.
+*/
+
+// Setup email transport using Gmail
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
@@ -11,7 +17,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// ✅ Robust formatting of date to military style (e.g., 22APR25)
+// Convert a date into military-style format (e.g., 22APR25)
 const formatDateMilitary = (input) => {
   if (!input) return '[Missing Date]';
   const iso = typeof input === 'string' ? input : input.toISOString();
@@ -22,7 +28,7 @@ const formatDateMilitary = (input) => {
   return `${day}${month}${year}`;
 };
 
-// ✅ Send CR Report Email
+// Build and send the email
 const sendReportEmail = async (reportData) => {
   const {
     date,
@@ -79,7 +85,7 @@ const sendReportEmail = async (reportData) => {
       to: process.env.EMAIL_TO,
       subject: `🎯 Final CR Report: ${formattedDate}`,
       html,
-    });
+    }); // Send email using transporter
     console.log('✅ Report email sent successfully.');
   } catch (err) {
     console.error('❌ Failed to send report email:', err.message);

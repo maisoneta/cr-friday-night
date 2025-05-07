@@ -1,22 +1,34 @@
+// File: frontend/src/pages/CRDashboard.jsx
+
+/*
+  CRDashboard displays Celebrate Recovery report data including:
+  - Last 12 entries with conditional highlights
+  - YTD totals and averages by selected year
+  - Year-over-year averages with highlighting
+  - Highest single-day values by category
+
+  Pulls data from the backend and auto-calculates derived fields.
+*/
+
 import React, { useEffect, useState } from 'react';
 import '../components/CRDashboard.css'; // Import styles specific to the CR dashboard
 import { API_BASE_URL } from '../config'; // Base API URL for backend communication
 
 // CRDashboard displays Celebrate Recovery attendance and contribution stats
 const CRDashboard = () => {
-  // Stores the full list of reports from the backend
+  // Report data
   const [reports, setReports] = useState([]);
   const [allReports, setAllReports] = useState([]);
-  // Stores the currently selected year to filter data
+
+  // Year selection
   const [displayYear, setDisplayYear] = useState(new Date().getFullYear());
-  // Stores all unique years found in report data
   const [allYears, setAllYears] = useState([]);
-  // Stores total values for selected year
+
+  // Aggregated stats
   const [totals, setTotals] = useState({});
-  // Stores average values for selected year
   const [averages, setAverages] = useState({});
 
-  // Fetch reports from the backend and process totals and averages
+  // Fetch report data and compute YTD totals/averages
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -86,7 +98,7 @@ const CRDashboard = () => {
     { key: 'stepStudyGraduates', label: 'Grad' }
   ];
 
-  // Format individual cell values for display
+  // Format display value based on key type (e.g., date or currency)
   const formatCell = (value, key) => {
     if (key === 'date') {
       // Format dates to MM/DD/YYYY
@@ -110,7 +122,7 @@ const CRDashboard = () => {
     }
   };
 
-  // Calculate overall averages for all years/fields for highlighting in YoY table
+  // Compute overall averages used for comparison highlights
   const allFieldSums = {};
   const allFieldCounts = {};
 
@@ -128,6 +140,7 @@ const CRDashboard = () => {
     overallAverages[key] = allFieldSums[key] / allFieldCounts[key];
   });
 
+  // Render dashboard layout with 4 summary tables and legend
   return (
     <div className="cr-dashboard">
       {/* Page Title */}
