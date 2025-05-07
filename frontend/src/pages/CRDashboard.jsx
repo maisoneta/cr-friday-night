@@ -350,7 +350,7 @@ const CRDashboard = () => {
 
               return (
                 <tr key={field.key}>
-                  <td>{field.label}</td>
+                  <td>{field.label === 'LgGp' ? 'Large Group' : field.label}</td>
                   <td>
                     {field.key.toLowerCase().includes('don') ||
                     field.key.toLowerCase().includes('fund') ||
