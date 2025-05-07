@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   background: var(--background-light);
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -186,4 +186,20 @@ textarea {
   flex-direction: column;
   margin-bottom: 0.3rem;
   padding: 0 0.25rem;
+}
+/* === Chart Wrapper ===
+   Allows charts to expand responsively and stay centered on the page. */
+.chart-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 300px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-sizing: border-box;
+  overflow-x: auto;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
