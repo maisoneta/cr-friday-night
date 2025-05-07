@@ -307,6 +307,63 @@ const CRDashboard = () => {
         </tbody>
       </table>
     </div>
+
+    {/* Highest Values by Category Table */}
+    <h3 className="table-header">Highest Single-Day Value</h3>
+    <div className="table-scroll-container">
+      <table className="cr-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Highest Value</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayFields
+            .filter((field) => field.key !== 'date')
+            .map((field) => {
+              let maxValue = null;
+              let maxDate = '';
+              allReports.forEach((report) => {
+                const value = report[field.key];
+                if (typeof value === 'number') {
+                  if (maxValue === null || value > maxValue) {
+                    maxValue = value;
+                    maxDate = report.date;
+                  }
+                }
+              });
+
+              return (
+                <tr key={field.key}>
+                  <td>{field.label}</td>
+                  <td>
+                    {field.key.toLowerCase().includes('don') ||
+                    field.key.toLowerCase().includes('fund') ||
+                    field.key.toLowerCase().includes('book') ||
+                    field.key.toLowerCase().includes('food')
+                      ? `$${(maxValue || 0).toFixed(2)}`
+                      : maxValue !== null
+                      ? maxValue
+                      : ''}
+                  </td>
+                  <td>
+                    {maxDate
+                      ? new Date(maxDate).toLocaleDateString('en-US', {
+                          timeZone: 'UTC',
+                          month: 'short',
+                          day: 'numeric',
+                          year: 'numeric'
+                        })
+                      : ''}
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
+    </div>
   </div>
 );
 };
