@@ -140,6 +140,20 @@ const CRDashboard = () => {
     overallAverages[key] = allFieldSums[key] / allFieldCounts[key];
   });
 
+  // Determine global and recent highest values per field
+  const globalHighs = {};
+  const recentHighs = {};
+
+  displayFields.forEach(({ key }) => {
+    if (key === 'date') return;
+
+    // Global max
+    globalHighs[key] = Math.max(...allReports.map(r => typeof r[key] === 'number' ? r[key] : -Infinity));
+
+    // Recent max (within last 12)
+    recentHighs[key] = Math.max(...reports.map(r => typeof r[key] === 'number' ? r[key] : -Infinity));
+  });
+
   // Render dashboard layout with 4 summary tables and legend
   return (
     <div className="cr-dashboard">
@@ -150,6 +164,7 @@ const CRDashboard = () => {
       <div className="legend">
         <span><span className="legend-box legend-green" /> Above Average</span>
         <span><span className="legend-box legend-yellow" /> Below Average</span>
+        <span><span className="legend-box recent-highest" /> Recent Highest Value</span>
       </div>
 
       {/* Last 12 Entries Table */}
@@ -171,14 +186,23 @@ const CRDashboard = () => {
                   const avg = parseFloat(averages[field.key]);
                   let className = '';
 
-                  // Highlight above/below average values
+                  // Highlight above/below average
                   if (typeof rawValue === 'number' && !isNaN(avg)) {
                     if (rawValue > avg) className = 'above-average';
                     else if (rawValue < avg) className = 'below-average';
                   }
 
+                  // Highlight recent highest value
+                  if (
+                    typeof rawValue === 'number' &&
+                    rawValue === globalHighs[field.key] &&
+                    rawValue === recentHighs[field.key]
+                  ) {
+                    className += ' recent-highest';
+                  }
+
                   return (
-                    <td key={field.key} className={className}>
+                    <td key={field.key} className={className.trim()}>
                       {formatCell(rawValue, field.key)}
                     </td>
                   );

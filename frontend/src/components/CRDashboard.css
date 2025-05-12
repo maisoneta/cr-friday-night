@@ -6,7 +6,7 @@
 .cr-dashboard {
   font-family: inherit;
   padding: 2rem 0.5rem;
-  background: var(--background-light);
+  background: #FFF8E6;
 }
 
 /* === Page title styling === */
@@ -15,7 +15,7 @@
   font-weight: bold;
   margin-bottom: 1.2rem;
   text-align: center;
-  color: var(--primary-blue);
+  color: #1D3557;
   letter-spacing: 1px;
 }
 
@@ -24,7 +24,7 @@
   font-size: 1.4rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: var(--primary-blue);
+  color: #1D3557;
   font-weight: 700;
   letter-spacing: 0.5px;
   text-align: center;
@@ -38,7 +38,7 @@
   box-shadow: 0 6px 24px rgba(22,76,136,0.06);
   border-radius: 16px;
   overflow: hidden;
-  background: var(--white);
+  background: #FFFFFF;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -62,22 +62,24 @@
 
 /* === Specific header cell enhancements (stickiness and background) === */
 .cr-table th {
-  background: var(--table-header);
+  background: #A8DADC;
   font-weight: bold;
-  color: var(--primary-blue);
+  color: #1D3557;
   position: sticky;
   top: 0;
   z-index: 1;
 }
 
 /* === Zebra striping for better readability === */
+/* === Zebra striping for better readability === */
 .cr-table tbody tr:nth-child(even) {
-  background: var(--gray-accent);
+  background: #F1F1F1;
 }
 
 /* === Hover effect for row highlighting === */
+/* === Hover effect for row highlighting === */
 .cr-table tbody tr:hover {
-  background: var(--background-light);
+  background: #E4E4E4;
 }
 
 /* === Dropdown selector styling for year filter === */
@@ -89,28 +91,28 @@
 .year-selector label {
   margin-right: 0.6rem;
   font-weight: 600;
-  color: var(--primary-blue);
+  color: #1D3557;
 }
 
 select#year {
   padding: 0.5rem 0.8rem;
   font-size: 1rem;
   border-radius: 7px;
-  border: 1.5px solid var(--primary-blue);
-  background: var(--white);
-  color: var(--text-dark);
+  border: 1.5px solid #1D3557;
+  background: #FFFFFF;
+  color: #1D3557;
 }
 
 /* === Styling for data points above average === */
 .above-average {
-  background: var(--success-green);
+  background: #C3E88D;
   font-weight: bold;
   box-shadow: inset 0 0 4px #c4e2c7;
 }
 
 /* === Styling for data points below average === */
 .below-average {
-  background: var(--warning-yellow);
+  background: #F9C49A;
   box-shadow: inset 0 0 4px #f3edae;
 }
 
@@ -122,7 +124,7 @@ select#year {
   margin-top: -1rem;
   margin-bottom: 1rem;
   font-size: 0.97rem;
-  color: var(--gray-medium);
+  color: #4B4B4B;
 }
 
 /* === Flex layout for each item inside the legend === */
@@ -143,11 +145,11 @@ select#year {
 
 /* === Background colors for legend status boxes === */
 .legend-green {
-  background: var(--success-green);
+  background: #C3E88D;
 }
 
 .legend-yellow {
-  background: var(--warning-yellow);
+  background: #F9C49A;
 }
 
 @media (max-width: 768px) {
@@ -155,4 +157,10 @@ select#year {
     width: 100%;
     max-width: 100%;
   }
+}
+/* === Highlight for recent highest single-day value (last 12 entries) === */
+.recent-highest {
+  background: #FFDD57; /* golden yellow */
+  font-weight: bold;
+  box-shadow: inset 0 0 6px #cfa800;
 }

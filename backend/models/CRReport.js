@@ -80,7 +80,9 @@ const CRReportSchema = new mongoose.Schema(
     },
     foodDonation: {           // ✅ Estimated dollar value of food donated
       type: Number,
-      default: 0,
+      default: 0.0,
+      get: v => parseFloat(v),
+      set: v => parseFloat(v),
     },
     stepStudyGraduates: {     // ✅ Number of Step Study graduates
       type: Number,

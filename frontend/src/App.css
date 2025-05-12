@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: var(--background-light);
+  background: #FFF8E6;
   max-width: 100%;
   margin: 0 auto;
 }
@@ -19,7 +19,7 @@
    Styles the h2 title on entry pages. */
 .entry-page h2 {
   text-align: center;
-  color: var(--primary-blue);
+  color: #1D3557;
   font-weight: 700;
   margin-top: 0rem;
   margin-bottom: 0.1rem;
@@ -31,14 +31,14 @@
 .entry-page form {
   width: 100%;
   max-width: 500px;
-  background: var(--white);
+  background: #FFFFFF;
   padding: 1.5rem;
   border-radius: 18px;
   box-shadow: 0 4px 20px rgba(22,76,136,0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--gray-accent);
+  border: 1px solid #A8DADC;
 }
 
 /* === Label Styling ===
@@ -46,7 +46,7 @@
 .entry-page label {
   margin: 0.4rem 0 0.2rem 0;
   font-weight: 500;
-  color: var(--primary-blue);
+  color: #1D3557;
   text-align: left;
   width: 100%;
   max-width: 400px;
@@ -61,9 +61,9 @@
   font-size: 0.95rem;
   box-sizing: border-box;
   margin-bottom: 0rem;
-  border: 1.5px solid var(--primary-blue);
+  border: 1.5px solid #1D3557;
   border-radius: 10px;
-  background: var(--gray-accent);
+  background: #F1F1F1;
   transition: border 0.2s;
 }
 
@@ -72,15 +72,15 @@
 .entry-page select:focus,
 .entry-page input:focus {
   outline: none;
-  border-color: var(--primary-blue);
-  box-shadow: 0 0 4px var(--primary-blue, #164c88);
+  border-color: #1D3557;
+  box-shadow: 0 0 4px #1D3557;
 }
 
 /* === Submit Button ===
    Styled button for form submission. */
 .entry-page button[type="submit"] {
-  background: var(--primary-blue);
-  color: var(--white);
+  background: #1D3557;
+  color: #FFF8E6;
   padding: 0.7rem 1.4rem;
   font-size: 1.08rem;
   border: none;
@@ -97,7 +97,7 @@
 /* === Submit Button Hover ===
    Darkens the button on hover. */
 .entry-page button[type="submit"]:hover {
-  background: var(--orange-dark);
+  background: #E77A27;
 }
 
 /* === Mobile Padding Adjustments ===
@@ -141,7 +141,7 @@ textarea {
   text-align: center;
   font-weight: 700;
   font-size: 1.4rem;
-  color: var(--primary-blue);
+  color: #1D3557;
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -157,7 +157,7 @@ textarea {
    Styling for the label next to the dropdown. */
 .year-selector label {
   font-weight: 600;
-  color: var(--primary-blue);
+  color: #1D3557;
   margin-right: 0.5rem;
 }
 
@@ -167,8 +167,8 @@ textarea {
   padding: 0.4rem 0.6rem;
   font-size: 1rem;
   border-radius: 8px;
-  border: 1px solid var(--primary-blue);
-  background: var(--gray-accent);
+  border: 1px solid #1D3557;
+  background: #F1F1F1;
 }
 @media (max-width: 500px) {
   .entry-page input,
@@ -193,7 +193,7 @@ textarea {
   width: 100%;
   max-width: 1200px;
   min-height: 300px;
-  background-color: #ffffff;
+  background-color: #FFFFFF;
   border-radius: 12px;
   padding: 1rem;
   box-sizing: border-box;

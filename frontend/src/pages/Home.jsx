@@ -15,7 +15,7 @@ import CRLogo from '../assets/CR_CanyonRidge_Logo.png';
 const Home = () => {
   // Render logo and navigation button layout
   return (
-    <div style={{ padding: '2rem', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
+    <div style={{ backgroundColor: '#FFF8E6', padding: '2rem', textAlign: 'center', fontFamily: 'Arial, sans-serif' }}>
       <img
         src={CRLogo}
         alt="Canyon Ridge Celebrate Recovery Logo"
@@ -55,8 +55,8 @@ const buttonStyle = {
   padding: '1rem 1.5rem',
   fontSize: '1rem',
   fontWeight: 'bold',
-  backgroundColor: '#007bff',
-  color: '#fff',
+  backgroundColor: '#1D3557',
+  color: '#FFF8E6',
   border: 'none',
   borderRadius: '8px',
   cursor: 'pointer',
