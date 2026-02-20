@@ -16,6 +16,14 @@ const pendingReportSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  comment: {
+    type: String,
+    default: '',
+  },
+  group: {
+    type: String,
+    default: '',
+  },
 });
 
 // Create a unique index on the (date, type) pair for database-level protection

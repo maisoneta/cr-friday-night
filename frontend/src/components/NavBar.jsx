@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import './NavBAR.css';
+import './NavBar.css';
 
 const NavBar = () => {
   return (

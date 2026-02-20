@@ -4,20 +4,32 @@
    Includes root theme variables, base font settings, and background color.
 */
 
-/* CSS variables for color theme and reusable values */
+/* CSS variables - Celebrate Recovery brand palette (celebraterecovery.com) */
 :root {
-  --primary-blue: #164c88;
-  --background-light: #e9f1fa;
+  --cr-teal: #008B8B;
+  --cr-teal-dark: #006D6D;
+  --cr-teal-light: #7EC8C8;
+  --cr-navy: #1B4965;
+  --cr-navy-light: #2a5a7a;
+  --cr-orange: #E07C3C;
+  --cr-orange-dark: #c96a2e;
+  --cr-bg: #F0F7F8;
+  --cr-bg-warm: #F8FCFD;
+  --cr-text: #2D3748;
+  --cr-text-light: #F8FCFD;
+  --cr-border: #A8DEE0;
+  --primary-blue: var(--cr-teal);
+  --background-light: var(--cr-bg);
   --gray-accent: #f5f7fa;
   --gray-medium: #888;
-  --text-dark: #222;
-  --text-darker: #333;
+  --text-dark: var(--cr-text);
+  --text-darker: #1a365d;
   --white: #fff;
   --table-header: #cde9f6;
   --success-green: #eaf6ef;
   --warning-yellow: #fffde0;
-  --orange: #ffa500;
-  --orange-dark: #ff9900;
+  --orange: var(--cr-orange);
+  --orange-dark: var(--cr-orange-dark);
 }
 
 /* Global body styles including font stack and background color */
@@ -28,8 +40,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--background-light);
-  color: var(--text-dark);
+  background: var(--cr-bg);
+  color: var(--cr-text);
 }
 
 /* Monospace font stack for inline <code> elements */

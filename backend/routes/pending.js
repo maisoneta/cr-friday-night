@@ -11,7 +11,7 @@ const PendingReport = require('../models/PendingReport');
  * - Responds with 409 if a duplicate is found.
  */
 router.post('/', async (req, res) => {
-  let { date, type, value } = req.body;
+  let { date, type, value, comment = '', group = '', replace = false } = req.body;
 
   // Normalize date to YYYY-MM-DD
   if (date) {
@@ -27,8 +27,13 @@ router.post('/', async (req, res) => {
   }
 
   try {
-    // Save the new pending entry
-    const entry = new PendingReport({ date, type, value });
+    // If replace is true, delete existing entry for this (date, type) first
+    if (replace) {
+      await PendingReport.deleteOne({ date, type });
+    }
+
+    // Save the new pending entry (comment and group are optional)
+    const entry = new PendingReport({ date, type, value, comment, group });
     await entry.save();
     res.status(201).json({ message: 'Pending entry saved', entry });
   } catch (error) {

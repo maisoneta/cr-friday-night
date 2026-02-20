@@ -5,6 +5,7 @@ import React from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 
 // Import the layout component that wraps all routed pages
+import './App.css';
 import AppLayout from './components/AppLayout';
 
 // --- Page Views (Routed) ---

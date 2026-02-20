@@ -6,7 +6,7 @@
 .cr-dashboard {
   font-family: inherit;
   padding: 2rem 0.5rem;
-  background: #FFF8E6;
+  background: var(--cr-bg);
 }
 
 /* === Page title styling === */
@@ -15,7 +15,7 @@
   font-weight: bold;
   margin-bottom: 1.2rem;
   text-align: center;
-  color: #1D3557;
+  color: var(--cr-navy);
   letter-spacing: 1px;
 }
 
@@ -24,7 +24,7 @@
   font-size: 1.4rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  color: #1D3557;
+  color: var(--cr-navy);
   font-weight: 700;
   letter-spacing: 0.5px;
   text-align: center;
@@ -35,7 +35,7 @@
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 2rem;
-  box-shadow: 0 6px 24px rgba(22,76,136,0.06);
+  box-shadow: 0 6px 24px rgba(0, 139, 139, 0.08);
   border-radius: 16px;
   overflow: hidden;
   background: #FFFFFF;
@@ -62,9 +62,9 @@
 
 /* === Specific header cell enhancements (stickiness and background) === */
 .cr-table th {
-  background: #A8DADC;
+  background: var(--cr-teal-light);
   font-weight: bold;
-  color: #1D3557;
+  color: var(--cr-navy);
   position: sticky;
   top: 0;
   z-index: 1;
@@ -91,16 +91,16 @@
 .year-selector label {
   margin-right: 0.6rem;
   font-weight: 600;
-  color: #1D3557;
+  color: var(--cr-navy);
 }
 
 select#year {
   padding: 0.5rem 0.8rem;
   font-size: 1rem;
   border-radius: 7px;
-  border: 1.5px solid #1D3557;
+  border: 1.5px solid var(--cr-teal);
   background: #FFFFFF;
-  color: #1D3557;
+  color: var(--cr-navy);
 }
 
 /* === Styling for data points above average === */

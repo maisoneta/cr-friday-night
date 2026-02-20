@@ -6,6 +6,7 @@
   configures middleware, and sets up API routes.
 */
 
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
@@ -13,8 +14,8 @@ const connectDB = require('./config/db');
 const pendingRoutes = require('./routes/pending');
 const reportsRoutes = require('./routes/reports');
 
-// Load environment variables (e.g., MONGO_URI, PORT)
-dotenv.config();
+// Load environment variables from backend/.env (e.g., MONGO_URI, PORT)
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 // Show MongoDB URI (for debugging only – remove in production)
 console.log(`Connecting to MongoDB: ${process.env.MONGO_URI}`);

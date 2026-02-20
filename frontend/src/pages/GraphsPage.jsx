@@ -73,8 +73,8 @@ const GraphsPage = () => {
       {
         label: 'Large Group Attendance',
         data: reportData.map(entry => entry.largeGroupChurch),
-        borderColor: '#164c88',
-        backgroundColor: 'rgba(22,76,136,0.3)',
+        borderColor: '#008B8B',
+        backgroundColor: 'rgba(0, 139, 139, 0.3)',
         fill: true,
         tension: 0.3,
         datalabels: {
@@ -93,7 +93,7 @@ const GraphsPage = () => {
         // Remove the label from the dashed "Yearly Average" line
         // label: 'Yearly Average',
         data: new Array(reportData.length).fill(average),
-        borderColor: '#f59e0b', // Tailwind's yellow-500
+        borderColor: '#E07C3C', // CR orange accent
         borderDash: [6, 6],
         pointRadius: 0,
         fill: false,
@@ -125,12 +125,12 @@ const GraphsPage = () => {
     datasets: [
       {
         label: `${new Date().getFullYear()} Average`,
-        backgroundColor: '#3b82f6',
+        backgroundColor: '#008B8B',
         data: yearlyAverages.current || []
       },
       {
         label: `${new Date().getFullYear() - 1} Average`,
-        backgroundColor: '#f59e0b',
+        backgroundColor: '#E07C3C',
         data: yearlyAverages.previous || []
       }
     ]
@@ -164,7 +164,7 @@ const GraphsPage = () => {
   return (
     <div className="entry-page">
       <h2 style={{ textAlign: 'center' }}>📈 Graphs & Visuals</h2>
-      <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#555', marginTop: '-0.5rem' }}>
+      <p style={{ textAlign: 'center', fontSize: '0.9rem', color: '#2D3748', marginTop: '-0.5rem' }}>
         Tip: If viewing on phone rotate for best viewing.
       </p>
       {loading ? (

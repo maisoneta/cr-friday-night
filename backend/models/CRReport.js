@@ -101,6 +101,16 @@ const CRReportSchema = new mongoose.Schema(
       default: 0,
     },
 
+    // ✅ Optional notes and submitter
+    comment: {                // ✅ Ministry Lead notes or comments on the report
+      type: String,
+      default: '',
+    },
+    submittedBy: {            // ✅ Who submitted the final report (e.g., Ministry Lead name)
+      type: String,
+      default: 'admin',
+    },
+
     // ✅ Admin Controls
     approved: {               // ✅ Indicates if report has been reviewed and approved
       type: Boolean,

@@ -2,6 +2,79 @@
    App.css - Styling for Entry Form Pages and Shared Elements
    ========================================================== */
 
+/* === Home Page === */
+.home-page {
+  min-height: calc(100vh - 5rem);
+  background: var(--cr-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.home-card {
+  width: 100%;
+  max-width: 420px;
+  background: #FFFFFF;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(0, 139, 139, 0.1);
+  border: 1px solid var(--cr-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.home-logo {
+  width: 110px;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.home-tagline {
+  color: var(--cr-navy);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0 0 1.5rem 0;
+  letter-spacing: 0.02em;
+}
+
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+  max-width: 280px;
+}
+
+.home-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--cr-text-light);
+  background: linear-gradient(135deg, var(--cr-teal) 0%, var(--cr-teal-dark) 100%);
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(0, 139, 139, 0.25);
+  transition: all 0.2s ease;
+}
+
+.home-link:hover {
+  background: linear-gradient(135deg, var(--cr-orange) 0%, var(--cr-orange-dark) 100%);
+  box-shadow: 0 4px 14px rgba(224, 124, 60, 0.35);
+  transform: translateY(-1px);
+}
+
+.home-link-icon {
+  font-size: 1.1rem;
+}
+
 /* === Entry Page Container ===
    Centers the form content and provides responsive padding. */
 .entry-page {
@@ -10,7 +83,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #FFF8E6;
+  background: var(--cr-bg);
   max-width: 100%;
   margin: 0 auto;
 }
@@ -19,7 +92,7 @@
    Styles the h2 title on entry pages. */
 .entry-page h2 {
   text-align: center;
-  color: #1D3557;
+  color: var(--cr-navy);
   font-weight: 700;
   margin-top: 0rem;
   margin-bottom: 0.1rem;
@@ -34,11 +107,11 @@
   background: #FFFFFF;
   padding: 1.5rem;
   border-radius: 18px;
-  box-shadow: 0 4px 20px rgba(22,76,136,0.08);
+  box-shadow: 0 4px 20px rgba(0, 139, 139, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #A8DADC;
+  border: 1px solid var(--cr-border);
 }
 
 /* === Label Styling ===
@@ -46,7 +119,7 @@
 .entry-page label {
   margin: 0.4rem 0 0.2rem 0;
   font-weight: 500;
-  color: #1D3557;
+  color: var(--cr-navy);
   text-align: left;
   width: 100%;
   max-width: 400px;
@@ -61,7 +134,7 @@
   font-size: 0.95rem;
   box-sizing: border-box;
   margin-bottom: 0rem;
-  border: 1.5px solid #1D3557;
+  border: 1.5px solid var(--cr-teal);
   border-radius: 10px;
   background: #F1F1F1;
   transition: border 0.2s;
@@ -72,15 +145,15 @@
 .entry-page select:focus,
 .entry-page input:focus {
   outline: none;
-  border-color: #1D3557;
-  box-shadow: 0 0 4px #1D3557;
+  border-color: var(--cr-teal);
+  box-shadow: 0 0 4px rgba(0, 139, 139, 0.3);
 }
 
 /* === Submit Button ===
    Styled button for form submission. */
 .entry-page button[type="submit"] {
-  background: #1D3557;
-  color: #FFF8E6;
+  background: var(--cr-teal);
+  color: var(--cr-text-light);
   padding: 0.7rem 1.4rem;
   font-size: 1.08rem;
   border: none;
@@ -90,14 +163,14 @@
   width: 100%;
   max-width: 400px;
   margin-top: 1.2rem;
-  box-shadow: 0 2px 8px rgba(22,76,136,0.09);
+  box-shadow: 0 2px 8px rgba(0, 139, 139, 0.15);
   transition: background 0.2s;
 }
 
 /* === Submit Button Hover ===
    Darkens the button on hover. */
 .entry-page button[type="submit"]:hover {
-  background: #E77A27;
+  background: var(--cr-orange);
 }
 
 /* === Mobile Padding Adjustments ===
@@ -117,6 +190,11 @@ input[type="tel"],
 select,
 textarea {
   font-size: 16px !important;
+}
+
+/* === Center numbers in input cells === */
+input[type="number"] {
+  text-align: center;
 }
 
 /* === Scrollable Table Container ===
@@ -141,7 +219,7 @@ textarea {
   text-align: center;
   font-weight: 700;
   font-size: 1.4rem;
-  color: #1D3557;
+  color: var(--cr-navy);
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
@@ -157,7 +235,7 @@ textarea {
    Styling for the label next to the dropdown. */
 .year-selector label {
   font-weight: 600;
-  color: #1D3557;
+  color: var(--cr-navy);
   margin-right: 0.5rem;
 }
 
@@ -167,7 +245,7 @@ textarea {
   padding: 0.4rem 0.6rem;
   font-size: 1rem;
   border-radius: 8px;
-  border: 1px solid #1D3557;
+  border: 1px solid var(--cr-teal);
   background: #F1F1F1;
 }
 @media (max-width: 500px) {

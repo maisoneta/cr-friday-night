@@ -30,7 +30,7 @@ const ThankYouPage = () => {
       </ul>
 
       <div style={{ marginTop: '2rem' }}>
-        <Link to="/entry">
+        <Link to="/dynamic-entry">
           <button style={{ padding: '0.5rem 1rem' }}>Submit Another Entry</button>
         </Link>
         {' '}
