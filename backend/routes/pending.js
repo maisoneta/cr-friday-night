@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const PendingReport = require('../models/PendingReport');
+const { handleValidationErrors, validatePendingPost, validatePendingGet } = require('../validation/validators');
 
 /**
  * POST /api/pending
@@ -10,20 +11,20 @@ const PendingReport = require('../models/PendingReport');
  * - Only one (date, type) pair is allowed per pending entry.
  * - Responds with 409 if a duplicate is found.
  */
-router.post('/', async (req, res) => {
+router.post('/', validatePendingPost, async (req, res) => {
+  if (handleValidationErrors(req, res)) return;
+
   let { date, type, value, comment = '', group = '', replace = false } = req.body;
 
-  // Normalize date to YYYY-MM-DD
-  if (date) {
+  // Normalize date to YYYY-MM-DD (validator may have converted to Date object)
+  if (date && typeof date !== 'string') {
+    date = date.toISOString().split('T')[0];
+  } else if (date) {
     try {
       date = new Date(date).toISOString().split('T')[0];
     } catch (e) {
       return res.status(400).json({ message: 'Invalid date format.' });
     }
-  }
-
-  if (!date || !type || value === undefined) {
-    return res.status(400).json({ message: 'Missing required fields' });
   }
 
   try {
@@ -50,9 +51,9 @@ router.post('/', async (req, res) => {
       });
     }
 
-    // Log and respond to any other errors
+    // Log server-side only; do not expose internal details to client
     console.error('Error saving pending entry:', error);
-    res.status(500).json({ message: 'Server error', details: error.message });
+    res.status(500).json({ message: 'Server error' });
   }
 });
 
@@ -60,15 +61,15 @@ router.post('/', async (req, res) => {
  * GET /api/pending/:date
  * Retrieve all pending entries for a specific date.
  */
-router.get('/:date', async (req, res) => {
+router.get('/:date', validatePendingGet, async (req, res) => {
+  if (handleValidationErrors(req, res)) return;
+
   let { date } = req.params;
   // Normalize date param to YYYY-MM-DD
-  if (date) {
-    try {
-      date = new Date(date).toISOString().split('T')[0];
-    } catch (e) {
-      return res.status(400).json({ message: 'Invalid date format.' });
-    }
+  try {
+    date = new Date(date).toISOString().split('T')[0];
+  } catch (e) {
+    return res.status(400).json({ message: 'Invalid date format.' });
   }
 
   try {

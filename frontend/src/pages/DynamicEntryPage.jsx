@@ -7,8 +7,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { API_BASE_URL } from '../config';
-import { fieldGroups } from '../fieldConfig';
+import { get, post } from '../api/client';
+import { fieldGroups, fieldLabels } from '../fieldConfig';
 
 const DynamicEntryPage = () => {
   const navigate = useNavigate();
@@ -30,16 +30,15 @@ const DynamicEntryPage = () => {
 
     const fetchExisting = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/pending/${date}`);
-        if (res.status === 404) {
+        const { ok, status, data } = await get(`/api/pending/${date}`);
+        if (status === 404) {
           setHasExistingData(false);
           setFormData({});
           setSectionComment('');
           return;
         }
-        if (!res.ok) return;
+        if (!ok) return;
 
-        const data = await res.json();
         const fields = fieldGroups[selectedOption] || [];
         const sectionEntries = (Array.isArray(data) ? data : []).filter(e => fields.includes(e.type));
 
@@ -103,11 +102,7 @@ const DynamicEntryPage = () => {
           replace: hasExistingData,
         };
 
-        const response = await fetch(`${API_BASE_URL}/api/pending`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+        const response = await post('/api/pending', payload);
 
         if (!response.ok) {
           throw new Error(`Failed to submit ${field}`);
@@ -178,10 +173,10 @@ const DynamicEntryPage = () => {
 
         {selectedFields.map(field => (
           <div className="form-group" key={field}>
-            <label>{field}:</label>
+            <label>{fieldLabels[field] ?? field}:</label>
             <input
               type="number"
-              value={formData[field] || ''}
+              value={formData[field] ?? ''}
               onChange={e => handleInputChange(field, e.target.value)}
               required
             />

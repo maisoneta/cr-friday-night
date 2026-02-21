@@ -6,13 +6,17 @@
   Intended for one-time use or admin-level maintenance tasks.
 */
 
+const path = require('path');
 const mongoose = require('mongoose');
-require('dotenv').config(); // Load environment variables from .env file
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const PendingReport = require('../models/PendingReport');
 
-// Use connection string from environment or fallback
-const mongoURI = process.env.MONGO_URI || 'your_fallback_mongodb_connection_string';
+const mongoURI = process.env.MONGO_URI;
+if (!mongoURI) {
+  console.error('❌ MONGO_URI is required. Set it in .env or your environment.');
+  process.exit(1);
+}
 
 // Connect to MongoDB and initiate cleanup
 mongoose.connect(mongoURI, {

@@ -17,6 +17,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// Escape HTML to prevent injection in email body
+const escapeHtml = (str) => {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+};
+
 // Convert a date into military-style format (e.g., 22APR25)
 const formatDateMilitary = (input) => {
   if (!input) return '[Missing Date]';
@@ -76,19 +87,22 @@ const sendReportEmail = async (reportData) => {
       <li><strong>Baptisms:</strong> ${baptisms || 0}</li>
       <li><strong>Step Study Graduates:</strong> ${stepStudyGraduates || 0}</li>
     </ul>
-    <p><strong>Comment:</strong> ${comment || '[No comment provided]'}</p>
+    <p><strong>Comment:</strong> ${escapeHtml(comment || '[No comment provided]')}</p>
   `;
 
   try {
     await transporter.sendMail({
       from: `"Celebrate Recovery Friday Night Numbers" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_TO,
-      subject: `🎯 Final CR Report: ${formattedDate}`,
+      subject: `🎯 Final CR Report: ${escapeHtml(formattedDate)}`,
       html,
-    }); // Send email using transporter
+    });
     console.log('✅ Report email sent successfully.');
   } catch (err) {
     console.error('❌ Failed to send report email:', err.message);
+    const emailError = new Error('Report saved but the notification email failed to send.');
+    emailError.code = 'EMAIL_FAILED';
+    throw emailError;
   }
 };
 

@@ -37,3 +37,17 @@ export const fieldLabels = {
   stepStudyGraduates: 'Step Study Graduates',
   comment: 'Comment'
 };
+
+/** Ordered field keys for the full report form (Submit Report / CRForm) */
+export const reportFormFieldKeys = [
+  'largeGroupChurch', 'children', 'childrenWorkers', 'blueChips',
+  'donations', 'salesFromBooks', 'foodDonation', 'mealsServed',
+  'teens', 'mensLifeIssues', 'mensAddiction', 'womensAddiction',
+  'womensLifeIssues', 'newBeginnings', 'baptisms', 'stepStudyGraduates'
+];
+
+/** Initial form state for the full report form */
+export const getReportFormInitialState = () => {
+  const base = reportFormFieldKeys.reduce((acc, key) => ({ ...acc, [key]: '' }), {});
+  return { date: '', ...base };
+};

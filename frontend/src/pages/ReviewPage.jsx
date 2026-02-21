@@ -9,7 +9,7 @@
 */
 
 import React, { useEffect, useState } from 'react';
-import { API_BASE_URL } from '../config';
+import { get, post, getErrorMessage } from '../api/client';
 import { fieldGroups, fieldLabels } from '../fieldConfig';
 
 const ReviewPage = () => {
@@ -33,11 +33,10 @@ const ReviewPage = () => {
 
     const fetchPendingData = async () => {
       try {
-        const response = await fetch(`${API_BASE_URL}/api/pending/${selectedDate}`);
-        const data = await response.json();
+        const { ok, status, data } = await get(`/api/pending/${selectedDate}`);
 
         // 404 = no pending entries for this date
-        if (response.status === 404) {
+        if (status === 404) {
           setFinalReport({});
           setStatus({});
           setSectionComments({});
@@ -46,8 +45,8 @@ const ReviewPage = () => {
           return;
         }
 
-        if (!response.ok) {
-          setErrorMessage(data.message || 'Failed to load pending data.');
+        if (!ok) {
+          setErrorMessage(getErrorMessage({ status, data }, 'Failed to load pending data.'));
           setInfoMessage('');
           return;
         }
@@ -95,22 +94,16 @@ const ReviewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_BASE_URL}/api/reports`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...finalReport, date: selectedDate })
-      });
+      const { ok, status, data } = await post('/api/reports', { ...finalReport, date: selectedDate });
 
-      if (response.status === 409) {
-        const data = await response.json();
-        setErrorMessage(data.message || 'Duplicate submission not allowed.');
+      if (status === 409) {
+        setErrorMessage(getErrorMessage({ status, data }, 'Duplicate submission not allowed.'));
         setInfoMessage('');
         return;
       }
 
-      if (!response.ok) {
-        const data = await response.json();
-        setErrorMessage(data.message || 'An unexpected error occurred.');
+      if (!ok) {
+        setErrorMessage(getErrorMessage({ status, data }, 'An unexpected error occurred.'));
         setInfoMessage('');
         return;
       }
@@ -179,7 +172,7 @@ const ReviewPage = () => {
                 <input
                   type="number"
                   name={key}
-                  value={finalReport[key] || ''}
+                  value={finalReport[key] ?? ''}
                   onChange={handleChange}
                   style={{ flex: 2, marginRight: '1rem', textAlign: 'center' }}
                 />

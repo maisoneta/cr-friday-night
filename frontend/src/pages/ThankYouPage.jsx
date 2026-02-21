@@ -7,16 +7,35 @@
 */
 import React from 'react';
 import { useLocation, Link } from 'react-router-dom';
+import { fieldLabels } from '../fieldConfig';
 
 // Access location state to retrieve submitted date and field data
 const ThankYouPage = () => {
   const location = useLocation();
   const { date, fields } = location.state || {};
 
-  // Render thank-you message, submitted values, and navigation options
+  // Fallback when accessed directly (no state from form submission)
+  if (!date && !fields) {
+    return (
+      <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem', textAlign: 'center' }}>
+        <h2>Thank You</h2>
+        <p>No submission data to display. You may have arrived here directly.</p>
+        <div style={{ marginTop: '2rem' }}>
+          <Link to="/dynamic-entry">
+            <button style={{ padding: '0.5rem 1rem' }}>Add Group Data</button>
+          </Link>
+          {' '}
+          <Link to="/">
+            <button style={{ padding: '0.5rem 1rem' }}>Return to Home</button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div style={{ maxWidth: '600px', margin: '0 auto', padding: '2rem' }}>
-      <h2>🎉 Thank You for Submitting!</h2>
+      <h2>Thank You for Submitting!</h2>
       <p>You've successfully submitted the following report for:</p>
       <p><strong>Date:</strong> {date}</p>
 
@@ -24,7 +43,7 @@ const ThankYouPage = () => {
         {fields &&
           Object.entries(fields).map(([field, value]) => (
             <li key={field}>
-              <strong>{field}</strong>: {value}
+              <strong>{fieldLabels[field] ?? field}</strong>: {value}
             </li>
           ))}
       </ul>

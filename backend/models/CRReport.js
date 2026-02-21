@@ -122,5 +122,8 @@ const CRReportSchema = new mongoose.Schema(
   }
 );
 
+// Index for date lookups and sorted queries
+CRReportSchema.index({ date: -1 });
+
 // ✅ Export the Mongoose model so it can be used in routes and controllers
 module.exports = mongoose.model('CRReport', CRReportSchema);

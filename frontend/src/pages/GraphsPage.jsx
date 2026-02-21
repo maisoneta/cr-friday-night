@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { API_BASE_URL } from '../config';
+import { get } from '../api/client';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement, Title, Tooltip, Legend, Filler);
 ChartJS.register(ChartDataLabels);
@@ -26,19 +26,20 @@ const GraphsPage = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const res = await fetch(`${API_BASE_URL}/api/reports`);
-        const data = await res.json();
+        const { ok, data } = await get('/api/reports');
+        if (!ok) throw new Error('Failed to load reports');
+        const reportList = Array.isArray(data) ? data : [];
 
         const currentYear = new Date().getFullYear();
-        const filtered = data
+        const filtered = reportList
           .filter(entry => new Date(entry.date).getFullYear() === currentYear)
           .sort((a, b) => new Date(a.date) - new Date(b.date));
 
         setReportData(filtered);
 
         const previousYear = currentYear - 1;
-        const currentData = data.filter(entry => new Date(entry.date).getFullYear() === currentYear);
-        const prevData = data.filter(entry => new Date(entry.date).getFullYear() === previousYear);
+        const currentData = reportList.filter(entry => new Date(entry.date).getFullYear() === currentYear);
+        const prevData = reportList.filter(entry => new Date(entry.date).getFullYear() === previousYear);
 
         const calcAvg = (arr, key) => arr.length ? arr.reduce((sum, e) => sum + (e[key] || 0), 0) / arr.length : 0;
 
