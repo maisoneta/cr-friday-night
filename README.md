@@ -110,8 +110,8 @@ cr-friday-night/
 | `MONGO_URI` | Backend | Yes | MongoDB connection string |
 | `PORT` | Backend | No | Server port (default 5002) |
 | `ALLOWED_ORIGINS` | Backend | No | CORS origins, comma-separated (defaults for Render + localhost) |
-| `EMAIL_USER` | Backend | No | Gmail for report emails |
-| `EMAIL_PASS` | Backend | No | Gmail app password |
+| `RESEND_API_KEY` | Backend | No | Resend API key (resend.com) for report emails |
+| `RESEND_FROM` | Backend | No | Sender address (e.g. `CR <onboarding@resend.dev>`) |
 | `EMAIL_TO` | Backend | No | Report email recipient |
 | `REACT_APP_API_URL` | Frontend | No | Backend URL (default localhost:5002) |
 
@@ -135,13 +135,22 @@ cr-friday-night/
 
 - **Build:** `cd backend && npm install`
 - **Start:** `npm start`
-- **Env vars:** Set `MONGO_URI`, and optionally `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_TO`, `PORT`
+- **Env vars:** Set `MONGO_URI`, and optionally `RESEND_API_KEY`, `RESEND_FROM`, `EMAIL_TO`, `PORT`
 
 ### Frontend (Static Site)
 
 - **Build:** `cd frontend && npm install && npm run build`
 - **Publish directory:** `build`
 - **Env var:** `REACT_APP_API_URL` = your backend URL (e.g. `https://cr-friday-night-backend.onrender.com`)
+
+### Email (Resend)
+
+Report notifications use [Resend](https://resend.com), which works on Render free tier (no SMTP ports).
+
+1. Create an account at resend.com and get an API key.
+2. Set `RESEND_API_KEY`, `RESEND_FROM`, and `EMAIL_TO` in your backend env.
+3. **Free tier**: Use `RESEND_FROM="CR Friday Night <onboarding@resend.dev>"` – emails only go to your Resend signup address.
+4. **Production**: Add and verify your domain in Resend, then use `RESEND_FROM="CR <notifications@yourdomain.com>"`.
 
 ### CORS
 

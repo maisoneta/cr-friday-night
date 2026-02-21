@@ -9,8 +9,16 @@
 */
 
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { get, post, getErrorMessage } from '../api/client';
-import { fieldGroups, fieldLabels } from '../fieldConfig';
+import { fieldGroups, fieldLabels, reportFormFieldKeys } from '../fieldConfig';
+
+// Format date for display (e.g., "10 Feb 2026")
+const formatDateReadable = (isoDate) => {
+  if (!isoDate) return '';
+  const d = new Date(isoDate + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+};
 
 const ReviewPage = () => {
   // Selected date to review
@@ -23,6 +31,12 @@ const ReviewPage = () => {
   // Error, info, or success message display
   const [errorMessage, setErrorMessage] = useState('');
   const [infoMessage, setInfoMessage] = useState('');
+
+  // Success state: show confirmation view instead of form
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submittedDate, setSubmittedDate] = useState('');
+  const [submittedReport, setSubmittedReport] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Section comments from submitters (group name -> comment)
   const [sectionComments, setSectionComments] = useState({});
@@ -93,22 +107,29 @@ const ReviewPage = () => {
   // Submit finalized report to backend with error handling
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setErrorMessage('');
     try {
       const { ok, status, data } = await post('/api/reports', { ...finalReport, date: selectedDate });
 
       if (status === 409) {
         setErrorMessage(getErrorMessage({ status, data }, 'Duplicate submission not allowed.'));
         setInfoMessage('');
+        setIsSubmitting(false);
         return;
       }
 
       if (!ok) {
         setErrorMessage(getErrorMessage({ status, data }, 'An unexpected error occurred.'));
         setInfoMessage('');
+        setIsSubmitting(false);
         return;
       }
 
-      setErrorMessage('✅ Final report submitted!');
+      setSubmittedDate(selectedDate);
+      setSubmittedReport({ ...finalReport });
+      setSubmitSuccess(true);
+      setErrorMessage('');
       setInfoMessage('');
       setFinalReport({});
       setSectionComments({});
@@ -118,8 +139,73 @@ const ReviewPage = () => {
       console.error('Submission error:', err);
       setErrorMessage('An unexpected error occurred.');
       setInfoMessage('');
+    } finally {
+      setIsSubmitting(false);
     }
   };
+
+  // Success confirmation view (similar to ThankYouPage for Add Group Data)
+  if (submitSuccess) {
+    return (
+      <div className="entry-page">
+        <div style={{
+          width: '100%', maxWidth: '500px', margin: '0 auto',
+          background: '#FFFFFF', padding: '2rem', borderRadius: '18px',
+          boxShadow: '0 4px 20px rgba(0, 139, 139, 0.1)', border: '1px solid var(--cr-border)',
+          textAlign: 'center'
+        }}>
+          <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>✅</div>
+          <h2 style={{ color: 'var(--cr-navy)', margin: '0 0 0.5rem 0' }}>Report Submitted!</h2>
+          <p style={{ color: '#666', margin: '0 0 1rem 0' }}>
+            You've successfully submitted the final report for:
+          </p>
+          <p style={{ fontSize: '1.2rem', fontWeight: 600, color: 'var(--cr-teal)', margin: '0 0 1.5rem 0' }}>
+            {formatDateReadable(submittedDate)}
+          </p>
+
+          <div style={{ textAlign: 'left', marginBottom: '1.5rem', padding: '1rem', backgroundColor: '#f8fbfb', borderRadius: '12px', border: '1px solid var(--cr-border)' }}>
+            <p style={{ margin: '0 0 0.75rem 0', fontSize: '0.9rem', color: '#666', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Submitted data summary</p>
+            {(reportFormFieldKeys || Object.keys(submittedReport))
+              .filter(key => key !== 'comment' && submittedReport[key] !== undefined && submittedReport[key] !== '' && submittedReport[key] !== null)
+              .map(key => (
+                <div key={key} style={{ marginBottom: '0.35rem', fontSize: '0.95rem' }}>
+                  <strong style={{ color: 'var(--cr-navy)' }}>{fieldLabels[key] ?? key}:</strong> {submittedReport[key]}
+                </div>
+              ))}
+            {submittedReport.comment && (
+              <div style={{ marginTop: '0.5rem', fontSize: '0.95rem', fontStyle: 'italic', color: '#555' }}>
+                <strong>Note:</strong> {submittedReport.comment}
+              </div>
+            )}
+          </div>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem', maxWidth: '280px', margin: '0 auto' }}>
+            <button
+              type="button"
+              onClick={() => { setSubmitSuccess(false); setSubmittedDate(''); setSubmittedReport({}); }}
+              style={{
+                width: '100%', padding: '0.9rem 1.25rem', fontSize: '1rem', fontWeight: 600,
+                color: 'var(--cr-text-light)', background: 'linear-gradient(135deg, var(--cr-teal) 0%, var(--cr-teal-dark) 100%)',
+                border: 'none', borderRadius: '12px', cursor: 'pointer',
+                boxShadow: '0 2px 8px rgba(0, 139, 139, 0.25)'
+              }}
+            >
+              Review Another Report
+            </button>
+            <Link to="/">
+              <button style={{
+                width: '100%', padding: '0.9rem 1.25rem', fontSize: '1rem', fontWeight: 600,
+                color: 'var(--cr-navy)', background: '#fff', border: '2px solid var(--cr-teal)',
+                borderRadius: '12px', cursor: 'pointer'
+              }}>
+                Return to Home
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Render instruction box, date picker, editable inputs, and submit button
   return (
@@ -203,15 +289,17 @@ const ReviewPage = () => {
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
           <button
             type="submit"
+            disabled={isSubmitting}
             style={{
               padding: '0.6rem 1.2rem',
-              backgroundColor: '#4CAF50',
+              backgroundColor: isSubmitting ? '#9e9e9e' : '#4CAF50',
               color: 'white',
               border: 'none',
-              borderRadius: '5px'
+              borderRadius: '5px',
+              cursor: isSubmitting ? 'not-allowed' : 'pointer'
             }}
           >
-            ✅ Submit Final Report
+            {isSubmitting ? 'Submitting…' : '✅ Submit Final Report'}
           </button>
         </div>
       </form>
